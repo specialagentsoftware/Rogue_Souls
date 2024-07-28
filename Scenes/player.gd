@@ -3,50 +3,46 @@ extends CharacterBody2D
 @export var speed :int = 200
 @export var friction :float = 0.50
 @export var acceleration :float = 0.1
-@onready var ap = $Marker2D/Graphics/AnimationPlayer
+@export var walk_animation_speed :float = 2
+@export var punch_animation_speed :float = 5.5
+@export var block_animation_speed :float = 3
+@export var idle_animation_speed :float = 1.2
+@onready var ap :AnimationPlayer = $Marker2D/Graphics/AnimationPlayer
 
 
-func get_movement():
-	var input = Vector2()
-	if Input.is_action_pressed('right'):
-		input.x += 1
-	if Input.is_action_pressed('left'):
-		input.x -= 1
+func get_movement() -> Vector2:
+	var input: Vector2 = Vector2()
 	if Input.is_action_pressed('back'):
 		input.y += 1
 	if Input.is_action_pressed('forward'):
 		input.y -= 1
+	if Input.is_action_pressed('right'):
+		input.x += 1
+	if Input.is_action_pressed('left'):
+		input.x -= 1
 	return input
 
-func _physics_process(delta):
-	var direction = get_movement()
+func _physics_process(delta:float) -> void:
+	var direction: Vector2 = get_movement()
 	
-	if direction.x != 0 or direction.y != 0 and ap.current_animation != "Punch" and ap.current_animation != "Block":
-		_play_animation("Walk")
-	elif ap.current_animation != "Punch" and ap.current_animation != "Block":
-		_play_animation("Idle")
+	if direction.x != 0 or direction.y != 0 and (ap.current_animation != "Punch" and ap.current_animation != "Block"):
+		ap.play("Walk",-1,walk_animation_speed,false)
+	elif (ap.current_animation != "Punch" and ap.current_animation != "Block"):
+		ap.play("Idle",-1,idle_animation_speed,false)
 		
 	if Input.is_action_just_pressed("punch"):
-		direction.x = 0
-		direction.y = 0
-		ap.stop()
-		if ap.current_animation == "Punch":
-			return
-		ap.play("Punch")
+		print(ap.current_animation)
+		ap.play("Punch",-1,punch_animation_speed,false)
 		
 	if Input.is_action_just_pressed("block"):
-		direction.x = 0
-		direction.y = 0
-		ap.stop()
-		if ap.current_animation == "Block":
-			return
-		ap.play("Block")
+		print(ap.current_animation)
+		ap.play("Block",-1,block_animation_speed,false)
 	
 	if direction.length() > 0:
 		velocity = velocity.lerp(direction.normalized() * speed, acceleration)
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
+		
+	print(ap.current_animation)
 	move_and_slide()
 	
-func _play_animation(animation_name):
-	ap.play(animation_name)

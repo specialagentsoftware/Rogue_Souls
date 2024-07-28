@@ -22,7 +22,7 @@ SceneManager="*res://Autoloads/SceneManager.gd"
 
 [debug]
 
-gdscript/warnings/untyped_declaration=2
+gdscript/warnings/untyped_declaration=1
 
 [display]
 

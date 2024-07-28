@@ -1,7 +1,7 @@
 extends Node
 
-@onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
-@onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
+@onready var SFX_BUS_ID :int = AudioServer.get_bus_index("SFX")
+@onready var MUSIC_BUS_ID :int = AudioServer.get_bus_index("Music")
 
 var user_prefs:UserPrefs
 var save:SaveData
@@ -9,9 +9,9 @@ var save:SaveData
 
 # temp - I'm not wild about preloads, but this menu is fairly light (to revise in a future version)
 var settings_menu_scene:PackedScene = preload("res://Menus/settings_menu.tscn")
-var settings_menu = null
+var settings_menu :SettingsMenu = null
  
-func _ready():
+func _ready() -> void:
 	user_prefs = UserPrefs.load_or_create()
 	
 	# SaveData extends JSONLoader to add methods to read and write data specifically for this game
@@ -48,7 +48,7 @@ func get_selected_language() -> String:
 	return LANGUAGES[0]
 
 # temp - maybe the settings menu doesn't need to live in a global spot? (will decide in future version)
-func open_settings_menu():
+func open_settings_menu() -> void:
 	if not settings_menu:
 		settings_menu = settings_menu_scene.instantiate()
 		get_tree().root.add_child(settings_menu)
