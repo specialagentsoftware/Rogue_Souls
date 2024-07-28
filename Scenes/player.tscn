@@ -1,5 +1,41 @@
-[gd_scene format=3 uid="uid://8l2ssqa8gdac"]
+[gd_scene load_steps=2 format=3 uid="uid://8l2ssqa8gdac"]
+
+[ext_resource type="Texture2D" uid="uid://qxv51itxqxmb" path="res://Assets/Player/player_sprite_sheet.png" id="1_3xuks"]
 
 [node name="Player" type="CharacterBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Graphics"]
+
+[node name="Body" type="Sprite2D" parent="Graphics"]
+texture = ExtResource("1_3xuks")
+region_enabled = true
+region_rect = Rect2(84.2166, 67.5602, 41.7117, 26.6491)
+
+[node name="Head" type="Sprite2D" parent="Graphics"]
+texture = ExtResource("1_3xuks")
+region_enabled = true
+region_rect = Rect2(98.159, 100.382, 17.6262, 20.1442)
+
+[node name="ArmR" type="Node2D" parent="Graphics"]
+
+[node name="HandMarker" type="Marker2D" parent="Graphics/ArmR"]
+
+[node name="Shoulder" type="Node2D" parent="Graphics/ArmR"]
+
+[node name="UpperARm" type="Sprite2D" parent="Graphics/ArmR/Shoulder"]
+
+[node name="Elbow" type="Node2D" parent="Graphics/ArmR/Shoulder"]
+
+[node name="LowerArm" type="Sprite2D" parent="Graphics/ArmR/Shoulder/Elbow"]
+
+[node name="Hand" type="Node2D" parent="Graphics/ArmR/Shoulder/Elbow/LowerArm"]
+
+[node name="Hand" type="Sprite2D" parent="Graphics/ArmR/Shoulder/Elbow/LowerArm/Hand"]
+
+[node name="ArmL" type="Node2D" parent="Graphics"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
