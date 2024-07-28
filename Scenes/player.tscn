@@ -1,41 +1,336 @@
-[gd_scene load_steps=2 format=3 uid="uid://8l2ssqa8gdac"]
+[gd_scene load_steps=16 format=3 uid="uid://4aag0r7aej6x"]
 
-[ext_resource type="Texture2D" uid="uid://qxv51itxqxmb" path="res://Assets/Player/player_sprite_sheet.png" id="1_3xuks"]
+[ext_resource type="Texture2D" uid="uid://dh5o6ypbv7rhj" path="res://Scenes/player/player_sprite_sheet.png" id="1_b12m6"]
+[ext_resource type="Script" path="res://BasicIK.gd" id="2_jgah1"]
+[ext_resource type="Texture2D" uid="uid://cuq3cs65xox80" path="res://Scenes/player/leg_spritesheet.png" id="3_oucah"]
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yeboh"]
+atlas = ExtResource("3_oucah")
+region = Rect2(0, 0, 128, 128)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7avr"]
+atlas = ExtResource("3_oucah")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6sagw"]
+atlas = ExtResource("3_oucah")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7wmd"]
+atlas = ExtResource("3_oucah")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afgec"]
+atlas = ExtResource("3_oucah")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25o14"]
+atlas = ExtResource("3_oucah")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6i4y"]
+atlas = ExtResource("3_oucah")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ho176"]
+atlas = ExtResource("3_oucah")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ndsdx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yeboh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7avr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6sagw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7wmd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_afgec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25o14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6i4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ho176")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_aptp5"]
+resource_name = "Punch"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArmR/HandMarker:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.4, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2, -28), Vector2(11, -4), Vector2(5, -48), Vector2(3, -15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArmR/HandMarker:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.4, 2),
+"transitions": PackedFloat32Array(1, 1, 4, 1),
+"update": 0,
+"values": [-2.66197, -2.5364, -1.86442, -1.86029]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmL/HandMarker:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.4, 1.9, 2.3, 2.5, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-2, -28), Vector2(12, -19), Vector2(-19, -4), Vector2(-23.9098, 4.73219), Vector2(-12, -10), Vector2(-1.93719, -36.394), Vector2(5, -55)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ArmL/HandMarker:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 1.4, 1.9, 2.3, 2.5, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.409817, 0.079046, -1.52907, -1.76649, -0.409817, -1.12084, -1.50689]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body:rotation")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.349708, -0.504085]
+}
+
+[sub_resource type="Animation" id="Animation_gcbt8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArmR/HandMarker:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(45, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArmR/HandMarker:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0267882]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmL/HandMarker:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-44, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ArmL/HandMarker:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-3.14159]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_76m1o"]
+_data = {
+"Punch": SubResource("Animation_aptp5"),
+"RESET": SubResource("Animation_gcbt8")
+}
+
+[node name="Player" type="Node2D"]
 
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Graphics"]
-
-[node name="Body" type="Sprite2D" parent="Graphics"]
-texture = ExtResource("1_3xuks")
-region_enabled = true
-region_rect = Rect2(84.2166, 67.5602, 41.7117, 26.6491)
-
-[node name="Head" type="Sprite2D" parent="Graphics"]
-texture = ExtResource("1_3xuks")
-region_enabled = true
-region_rect = Rect2(98.159, 100.382, 17.6262, 20.1442)
+sprite_frames = SubResource("SpriteFrames_ndsdx")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.112367
 
 [node name="ArmR" type="Node2D" parent="Graphics"]
+modulate = Color(0.219608, 0.219608, 0.219608, 1)
+position = Vector2(14, 0)
+script = ExtResource("2_jgah1")
+elbow_flipped = false
 
 [node name="HandMarker" type="Marker2D" parent="Graphics/ArmR"]
+position = Vector2(45, 0)
+rotation = -0.0267882
 
 [node name="Shoulder" type="Node2D" parent="Graphics/ArmR"]
+rotation = -0.0217357
 
-[node name="UpperARm" type="Sprite2D" parent="Graphics/ArmR/Shoulder"]
+[node name="UpperArm" type="Sprite2D" parent="Graphics/ArmR/Shoulder"]
+position = Vector2(11, 0)
+texture = ExtResource("1_b12m6")
+region_enabled = true
+region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Graphics/ArmR/Shoulder"]
+position = Vector2(23.0025, 0)
 
 [node name="LowerArm" type="Sprite2D" parent="Graphics/ArmR/Shoulder/Elbow"]
+position = Vector2(10, 1)
+texture = ExtResource("1_b12m6")
+region_enabled = true
+region_rect = Rect2(95, 27, 28, 14)
 
-[node name="Hand" type="Node2D" parent="Graphics/ArmR/Shoulder/Elbow/LowerArm"]
+[node name="Hand" type="Node2D" parent="Graphics/ArmR/Shoulder/Elbow"]
+position = Vector2(21, 0)
+rotation = -0.00505249
 
-[node name="Hand" type="Sprite2D" parent="Graphics/ArmR/Shoulder/Elbow/LowerArm/Hand"]
+[node name="Hand" type="Sprite2D" parent="Graphics/ArmR/Shoulder/Elbow/Hand"]
+position = Vector2(5.82018, 0.354264)
+texture = ExtResource("1_b12m6")
+region_enabled = true
+region_rect = Rect2(79, 11, 13, 10)
 
 [node name="ArmL" type="Node2D" parent="Graphics"]
+modulate = Color(0.219608, 0.219608, 0.219608, 1)
+position = Vector2(-16, 0)
+script = ExtResource("2_jgah1")
+
+[node name="HandMarker" type="Marker2D" parent="Graphics/ArmL"]
+position = Vector2(-44, 0)
+rotation = -3.14159
+
+[node name="Shoulder" type="Node2D" parent="Graphics/ArmL"]
+rotation = 3.13062
+
+[node name="UpperArm" type="Sprite2D" parent="Graphics/ArmL/Shoulder"]
+position = Vector2(10.9857, -3.14713e-05)
+texture = ExtResource("1_b12m6")
+flip_v = true
+region_enabled = true
+region_rect = Rect2(92, 45, 31, 16)
+
+[node name="Elbow" type="Node2D" parent="Graphics/ArmL/Shoulder"]
+position = Vector2(23.0029, 2.98023e-08)
+rotation = 0.0229903
+
+[node name="LowerArm" type="Sprite2D" parent="Graphics/ArmL/Shoulder/Elbow"]
+position = Vector2(9.98098, -0.973703)
+texture = ExtResource("1_b12m6")
+flip_v = true
+region_enabled = true
+region_rect = Rect2(95, 27, 28, 14)
+
+[node name="Hand" type="Node2D" parent="Graphics/ArmL/Shoulder/Elbow"]
+position = Vector2(21, 0)
+rotation = -0.0120158
+
+[node name="Hand" type="Sprite2D" parent="Graphics/ArmL/Shoulder/Elbow/Hand"]
+position = Vector2(5.38285, 0.157818)
+texture = ExtResource("1_b12m6")
+flip_v = true
+region_enabled = true
+region_rect = Rect2(79, 11, 13, 10)
+
+[node name="Body" type="Sprite2D" parent="Graphics"]
+self_modulate = Color(0.196078, 0.196078, 0.196078, 1)
+texture = ExtResource("1_b12m6")
+region_enabled = true
+region_rect = Rect2(84, 67, 42, 28)
+
+[node name="Head" type="Sprite2D" parent="Graphics"]
+self_modulate = Color(0.160784, 0.160784, 0.160784, 1)
+position = Vector2(0, -5)
+texture = ExtResource("1_b12m6")
+region_enabled = true
+region_rect = Rect2(98, 100, 19, 21)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+libraries = {
+"": SubResource("AnimationLibrary_76m1o")
+}
+autoplay = "Punch"
+speed_scale = 2.032
