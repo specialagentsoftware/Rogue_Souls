@@ -541,4 +541,5 @@ region_rect = Rect2(98, 100, 19, 21)
 libraries = {
 "": SubResource("AnimationLibrary_76m1o")
 }
+autoplay = "Idle"
 speed_scale = 2.0
