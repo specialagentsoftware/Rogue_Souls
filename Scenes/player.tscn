@@ -455,6 +455,7 @@ position = Vector2(45, 0)
 rotation = -0.0267882
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmR"]
+rotation = -0.731892
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
 position = Vector2(11, 0)
@@ -463,7 +464,8 @@ region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
-position = Vector2(23.0032, 0)
+position = Vector2(23.0032, -9.53674e-07)
+rotation = -1.87908
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(10, 1)
@@ -473,7 +475,7 @@ region_rect = Rect2(95, 27, 28, 14)
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(21, 0)
-rotation = -0.0267882
+rotation = -0.0509991
 
 [node name="Hand" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand"]
 position = Vector2(5.82018, 0.354264)
@@ -491,7 +493,7 @@ position = Vector2(-44, 0)
 rotation = -3.14159
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmL"]
-rotation = 3.12971
+rotation = -2.46729
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
 position = Vector2(10.9857, -3.14713e-05)
@@ -501,8 +503,8 @@ region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
-position = Vector2(23.0034, -5.96046e-08)
-rotation = 0.0249055
+position = Vector2(23.0034, 9.53674e-07)
+rotation = 1.76047
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(9.98098, -0.973703)
@@ -513,7 +515,7 @@ region_rect = Rect2(95, 27, 28, 14)
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(21, 0)
-rotation = -0.0130172
+rotation = 0.297006
 
 [node name="Hand" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/Hand"]
 position = Vector2(5.38285, 0.157818)
