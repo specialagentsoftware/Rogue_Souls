@@ -1,13 +1,46 @@
-[gd_scene load_steps=22 format=3 uid="uid://4aag0r7aej6x"]
+[gd_scene load_steps=32 format=3 uid="uid://4aag0r7aej6x"]
 
-[ext_resource type="Texture2D" uid="uid://dh5o6ypbv7rhj" path="res://Scenes/player/player_sprite_sheet.png" id="1_b12m6"]
+[ext_resource type="Texture2D" uid="uid://numh6f2hjpen" path="res://Scenes/player/player_sprite_sheet.png" id="1_b12m6"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_kk7c1"]
 [ext_resource type="Script" path="res://BasicIK.gd" id="2_jgah1"]
-[ext_resource type="Texture2D" uid="uid://cuq3cs65xox80" path="res://Scenes/player/leg_spritesheet.png" id="3_oucah"]
+[ext_resource type="Texture2D" uid="uid://b1vsqlw57imaq" path="res://Scenes/player/leg_spritesheet.png" id="3_oucah"]
+[ext_resource type="Texture2D" uid="uid://b4jnf7yu5ishw" path="res://Assets/Player/leg_spritesheet1.png" id="3_p5lyg"]
 [ext_resource type="Script" path="res://Scenes/Marker2D.gd" id="5_otpac"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmt6h"]
 radius = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7glxx"]
+atlas = ExtResource("3_p5lyg")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4dkv"]
+atlas = ExtResource("3_p5lyg")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0cni"]
+atlas = ExtResource("3_p5lyg")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck31v"]
+atlas = ExtResource("3_p5lyg")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pv30b"]
+atlas = ExtResource("3_p5lyg")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uylf4"]
+atlas = ExtResource("3_p5lyg")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdq1s"]
+atlas = ExtResource("3_p5lyg")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7aky"]
+atlas = ExtResource("3_p5lyg")
+region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yeboh"]
 atlas = ExtResource("3_oucah")
@@ -43,6 +76,40 @@ region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ndsdx"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7glxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4dkv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0cni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ck31v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pv30b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uylf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdq1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7aky")
+}],
+"loop": false,
+"name": &"dodge",
+"speed": 50.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yeboh")
@@ -124,6 +191,58 @@ tracks/3/keys = {
 "values": [-2.66197, -3.55871, -2.66197]
 }
 
+[sub_resource type="Animation" id="Animation_x83ra"]
+resource_name = "Dodge"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArmR/HandMarker:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-1, -26), Vector2(-8.00015, -41), Vector2(-3.00009, -25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArmR/HandMarker:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-2.66197, -2.66197, -2.66197]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmL/HandMarker:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-2, -28), Vector2(-2.00015, -40.9999), Vector2(-3.00009, -22.9999)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ArmL/HandMarker:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.409817, -0.409817, -0.409817]
+}
+
 [sub_resource type="Animation" id="Animation_f1tna"]
 resource_name = "Idle"
 length = 2.0
@@ -131,58 +250,46 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:visible")
+tracks/0/path = NodePath("ArmR/HandMarker:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"times": PackedFloat32Array(0, 0.7, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-1, -26), Vector2(2, -18), Vector2(2, -25)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ArmR/HandMarker:position")
+tracks/1/path = NodePath("ArmR/HandMarker:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.7, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-1, -26), Vector2(2, -18), Vector2(2, -25)]
+"values": [-2.66197, -2.66197, -2.66197]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ArmR/HandMarker:rotation")
+tracks/2/path = NodePath("ArmL/HandMarker:position")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.7, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [-2.66197, -2.66197, -2.66197]
+"values": [Vector2(-2, -28), Vector2(5, -22), Vector2(3, -29)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ArmL/HandMarker:position")
+tracks/3/path = NodePath("ArmL/HandMarker:rotation")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.7, 1.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(-2, -28), Vector2(5, -22), Vector2(3, -29)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("ArmL/HandMarker:rotation")
-tracks/4/interp = 2
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.7, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
@@ -339,18 +446,6 @@ tracks/5/keys = {
 "update": 0,
 "values": [0.0]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("AnimatedSprite2D:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_oub06"]
 resource_name = "Walk"
@@ -358,58 +453,46 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:visible")
+tracks/0/path = NodePath("ArmR/HandMarker:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"times": PackedFloat32Array(0, 0.9, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-1, -26), Vector2(0.999999, -19), Vector2(1, -24)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ArmR/HandMarker:position")
+tracks/1/path = NodePath("ArmR/HandMarker:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.9, 1.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-1, -26), Vector2(0.999999, -19), Vector2(1, -24)]
+"values": [-2.66197, -2.66197, -2.66197]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ArmR/HandMarker:rotation")
+tracks/2/path = NodePath("ArmL/HandMarker:position")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.9, 1.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [-2.66197, -2.66197, -2.66197]
+"values": [Vector2(4, -24), Vector2(9, -24), Vector2(1, -22)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ArmL/HandMarker:position")
+tracks/3/path = NodePath("ArmL/HandMarker:rotation")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.9),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(4, -24), Vector2(9, -24), Vector2(1, -22)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("ArmL/HandMarker:rotation")
-tracks/4/interp = 2
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.9, 1.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
@@ -419,6 +502,7 @@ tracks/4/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_76m1o"]
 _data = {
 "Block": SubResource("Animation_vrto5"),
+"Dodge": SubResource("Animation_x83ra"),
 "Idle": SubResource("Animation_f1tna"),
 "Punch": SubResource("Animation_o1grs"),
 "RESET": SubResource("Animation_gcbt8"),
@@ -438,11 +522,10 @@ script = ExtResource("5_otpac")
 rotation = 1.5708
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Marker2D/Graphics"]
-visible = false
 sprite_frames = SubResource("SpriteFrames_ndsdx")
-animation = &"walk"
-autoplay = "walk"
-frame_progress = 0.112367
+animation = &"dodge"
+frame = 7
+frame_progress = 1.0
 
 [node name="ArmR" type="Node2D" parent="Marker2D/Graphics"]
 modulate = Color(0.219608, 0.219608, 0.219608, 1)
@@ -455,7 +538,6 @@ position = Vector2(45, 0)
 rotation = -0.0267882
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmR"]
-rotation = -0.731892
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
 position = Vector2(11, 0)
@@ -464,8 +546,7 @@ region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
-position = Vector2(23.0032, -9.53674e-07)
-rotation = -1.87908
+position = Vector2(23.0031, 0)
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(10, 1)
@@ -475,7 +556,7 @@ region_rect = Rect2(95, 27, 28, 14)
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(21, 0)
-rotation = -0.0509991
+rotation = -0.0267882
 
 [node name="Hand" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand"]
 position = Vector2(5.82018, 0.354264)
@@ -493,7 +574,7 @@ position = Vector2(-44, 0)
 rotation = -3.14159
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmL"]
-rotation = -2.46729
+rotation = 3.12972
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
 position = Vector2(10.9857, -3.14713e-05)
@@ -503,8 +584,8 @@ region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
-position = Vector2(23.0034, 9.53674e-07)
-rotation = 1.76047
+position = Vector2(23.0034, -7.45058e-08)
+rotation = 0.0248776
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(9.98098, -0.973703)
@@ -515,7 +596,7 @@ region_rect = Rect2(95, 27, 28, 14)
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(21, 0)
-rotation = 0.297006
+rotation = -0.0130026
 
 [node name="Hand" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/Hand"]
 position = Vector2(5.38285, 0.157818)

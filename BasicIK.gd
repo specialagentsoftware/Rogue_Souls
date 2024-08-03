@@ -61,7 +61,7 @@ func get_elbow_pos_local():
 	if is_nan(relative_elbow_angle):
 		relative_elbow_angle = 0.0
 	
-	var sign = 1
+	var sign:int = 1
 	if elbow_flipped:
 		sign = -1
 	

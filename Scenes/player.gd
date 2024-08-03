@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var punch_animation_speed :float = 5.5
 @export var block_animation_speed :float = 3
 @export var idle_animation_speed :float = 1.2
+@export var dodge_animation_speed :float = 50
 @onready var asprite : AnimatedSprite2D = $Marker2D/Graphics/AnimatedSprite2D
 @onready var ap :AnimationPlayer = $Marker2D/Graphics/AnimationPlayer
 enum states {Attacking, Walking, Idling, Blocking, Dodging}
@@ -28,10 +29,9 @@ func _physics_process(delta:float) -> void:
 	var direction: Vector2 = get_movement()
 	
 	if direction.x == 0 and direction.y == 0 and (ap.current_animation != "Punch" or ap.current_animation != "Block"):
-		asprite.visible = false
 		current_state = states.Idling
 	elif (ap.current_animation != "Punch" or ap.current_animation != "Block"):
-		asprite.visible = true
+		asprite.play("walk")
 		current_state = states.Walking
 		
 	if Input.is_action_just_pressed("punch"):
@@ -47,6 +47,15 @@ func _physics_process(delta:float) -> void:
 		ap.stop()
 		ap.play("Block",-1,block_animation_speed,false)
 		current_state = states.Blocking
+		
+	if Input.is_action_just_pressed("dodge"):
+		if ap.current_animation == "Dodge":
+			return
+		ap.stop()
+		ap.play("Dodge",-1,dodge_animation_speed,false)
+		current_state = states.Dodging
+		asprite.play("dodge")
+		
 	
 	if direction.length() > 0:
 		velocity = velocity.lerp(direction.normalized() * speed, acceleration)
@@ -54,5 +63,4 @@ func _physics_process(delta:float) -> void:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
 		
 	move_and_slide()
-	print(current_state)
 	
