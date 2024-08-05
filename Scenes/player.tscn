@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://cr77rchm7ctfg" path="res://Scenes/player_blur.tres" id="1_cbrgv"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_kk7c1"]
 [ext_resource type="Script" path="res://BasicIK.gd" id="2_jgah1"]
-[ext_resource type="PackedScene" uid="uid://ced3k766bpb82" path="res://player_ghost.tscn" id="3_h55qb"]
+[ext_resource type="PackedScene" uid="uid://ced3k766bpb82" path="res://Scenes/player_ghost.tscn" id="3_h55qb"]
 [ext_resource type="Texture2D" uid="uid://b1vsqlw57imaq" path="res://Scenes/player/leg_spritesheet.png" id="3_oucah"]
 [ext_resource type="Script" path="res://Scenes/Marker2D.gd" id="5_otpac"]
 
@@ -526,7 +526,7 @@ position = Vector2(-44, 0)
 rotation = -3.14159
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmL"]
-rotation = 3.12972
+rotation = 3.1297
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
 position = Vector2(10.9857, -3.14713e-05)
@@ -536,8 +536,8 @@ region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
-position = Vector2(23.0034, -7.45058e-08)
-rotation = 0.0248776
+position = Vector2(23.0034, -4.47035e-08)
+rotation = 0.0249125
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(9.98098, -0.973703)
@@ -548,7 +548,7 @@ region_rect = Rect2(95, 27, 28, 14)
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(21, 0)
-rotation = -0.0130026
+rotation = -0.0130209
 
 [node name="Area2D" type="Area2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/Hand"]
 

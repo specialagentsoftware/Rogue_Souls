@@ -13,7 +13,7 @@ enum states {Attacking, Walking, Idling, Blocking, Dodging}
 @onready var ap :AnimationPlayer = $Marker2D/Graphics/AnimationPlayer
 @onready var current_state = states.Idling
 @onready var dodge_timer: Timer = $Timers/Dodge_timer
-@onready var shadow_timer: Timer = $Timers/Shadow_tmer
+@onready var shadow_timer: Timer = $Timers/Shadow_timer
 @export var ghost: PackedScene
 
 func get_movement() -> Vector2:
@@ -80,7 +80,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func _add_ghost() -> void:
 	var ghost = ghost.instantiate()
-	ghost.set_property(position,1)
+	ghost.set_property(position,Vector2(1,1))
+	#ghost.set_property(rotation,get_global_mouse_position())
 	get_tree().current_scene.add_child(ghost)
 	
 func _on_shadow_timer_timeout():

@@ -12,3 +12,6 @@ func ghosting() -> void:
 	tween_fade.tween_property(self,"self_modulate",Color(1, 1, 1, 0),0.75)
 	await tween_fade.finished
 	queue_free()
+
+func _process(delta):
+	rotate(get_angle_to(get_global_mouse_position()))
