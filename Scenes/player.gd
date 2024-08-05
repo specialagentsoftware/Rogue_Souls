@@ -59,6 +59,7 @@ func _physics_process(delta:float) -> void:
 			return
 		current_state = states.Dodging
 		dodge_speed()
+		shadow_timer.start()
 		
 	
 	if direction.length() > 0:
@@ -81,7 +82,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _add_ghost() -> void:
 	var ghost = ghost.instantiate()
 	ghost.set_property(position,Vector2(1,1))
-	#ghost.set_property(rotation,get_global_mouse_position())
 	get_tree().current_scene.add_child(ghost)
 	
 func _on_shadow_timer_timeout():

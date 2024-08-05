@@ -591,7 +591,6 @@ one_shot = true
 
 [node name="Shadow_timer" type="Timer" parent="Timers"]
 wait_time = 0.15
-autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
