@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://4aag0r7aej6x"]
+[gd_scene load_steps=27 format=3 uid="uid://4aag0r7aej6x"]
 
-[ext_resource type="Texture2D" uid="uid://dh5o6ypbv7rhj" path="res://Scenes/player/player_sprite_sheet.png" id="1_b12m6"]
+[ext_resource type="Texture2D" uid="uid://numh6f2hjpen" path="res://Scenes/player/player_sprite_sheet.png" id="1_b12m6"]
 [ext_resource type="Material" uid="uid://cr77rchm7ctfg" path="res://Scenes/player_blur.tres" id="1_cbrgv"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_kk7c1"]
 [ext_resource type="Script" path="res://BasicIK.gd" id="2_jgah1"]
-[ext_resource type="Texture2D" uid="uid://cuq3cs65xox80" path="res://Scenes/player/leg_spritesheet.png" id="3_oucah"]
+[ext_resource type="PackedScene" uid="uid://ced3k766bpb82" path="res://player_ghost.tscn" id="3_h55qb"]
+[ext_resource type="Texture2D" uid="uid://b1vsqlw57imaq" path="res://Scenes/player/leg_spritesheet.png" id="3_oucah"]
 [ext_resource type="Script" path="res://Scenes/Marker2D.gd" id="5_otpac"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmt6h"]
@@ -457,6 +458,7 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 material = ExtResource("1_cbrgv")
 script = ExtResource("1_kk7c1")
+ghost = ExtResource("3_h55qb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jmt6h")
@@ -482,7 +484,6 @@ position = Vector2(45, 0)
 rotation = -0.0267882
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmR"]
-rotation = -0.73189
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
 position = Vector2(11, 0)
@@ -491,8 +492,7 @@ region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
-position = Vector2(23.0031, -1.90735e-06)
-rotation = -1.87908
+position = Vector2(23.0031, 0)
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(10, 1)
@@ -502,7 +502,7 @@ region_rect = Rect2(95, 27, 28, 14)
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(21, 0)
-rotation = -0.051004
+rotation = -0.0267882
 
 [node name="Area2D" type="Area2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand"]
 
@@ -526,7 +526,7 @@ position = Vector2(-44, 0)
 rotation = -3.14159
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmL"]
-rotation = -2.46729
+rotation = 3.12972
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
 position = Vector2(10.9857, -3.14713e-05)
@@ -536,8 +536,8 @@ region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
-position = Vector2(23.0034, 9.53674e-07)
-rotation = 1.76047
+position = Vector2(23.0034, -7.45058e-08)
+rotation = 0.0248776
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(9.98098, -0.973703)
@@ -548,10 +548,9 @@ region_rect = Rect2(95, 27, 28, 14)
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(21, 0)
-rotation = 0.297006
+rotation = -0.0130026
 
 [node name="Area2D" type="Area2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/Hand"]
-scale = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/Hand/Area2D"]
 position = Vector2(6.29993, 0.55626)
@@ -590,7 +589,13 @@ speed_scale = 2.0
 wait_time = 0.25
 one_shot = true
 
+[node name="Shadow_timer" type="Timer" parent="Timers"]
+wait_time = 0.15
+autostart = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
 
 [connection signal="area_entered" from="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="Timers/Dodge_timer" to="." method="_on_dodge_timer_timeout"]
+[connection signal="timeout" from="Timers/Shadow_timer" to="." method="_on_shadow_timer_timeout"]

@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+enum states {Attacking, Walking, Idling, Blocking, Dodging}
 @export var speed :int = 200
 @export var friction :float = 0.50
 @export var acceleration :float = 0.1
@@ -10,9 +11,10 @@ extends CharacterBody2D
 @export var dodge_animation_speed :float = 50
 @onready var asprite : AnimatedSprite2D = $Marker2D/Graphics/AnimatedSprite2D
 @onready var ap :AnimationPlayer = $Marker2D/Graphics/AnimationPlayer
-enum states {Attacking, Walking, Idling, Blocking, Dodging}
 @onready var current_state = states.Idling
-@onready var dodge_timer = $Timers/Dodge_timer
+@onready var dodge_timer: Timer = $Timers/Dodge_timer
+@onready var shadow_timer: Timer = $Timers/Shadow_tmer
+@export var ghost: PackedScene
 
 func get_movement() -> Vector2:
 	var input: Vector2 = Vector2()
@@ -70,10 +72,16 @@ func dodge_speed() -> void:
 	speed = 650
 	dodge_timer.start()
 
-
 func _on_dodge_timer_timeout() -> void:
 	speed = 200
 
-
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	print(area)
+
+func _add_ghost() -> void:
+	var ghost = ghost.instantiate()
+	ghost.set_property(position,1)
+	get_tree().current_scene.add_child(ghost)
+	
+func _on_shadow_timer_timeout():
+	_add_ghost()
