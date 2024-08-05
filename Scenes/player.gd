@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var ap :AnimationPlayer = $Marker2D/Graphics/AnimationPlayer
 enum states {Attacking, Walking, Idling, Blocking, Dodging}
 @onready var current_state = states.Idling
+@onready var dodge_timer = $Timers/Dodge_timer
 
 func get_movement() -> Vector2:
 	var input: Vector2 = Vector2()
@@ -30,7 +31,10 @@ func _physics_process(delta:float) -> void:
 	
 	if direction.x == 0 and direction.y == 0 and (ap.current_animation != "Punch" or ap.current_animation != "Block"):
 		current_state = states.Idling
+		asprite.visible = false
+		#ap.play("Idle")
 	elif (ap.current_animation != "Punch" or ap.current_animation != "Block"):
+		asprite.visible = true
 		asprite.play("walk")
 		current_state = states.Walking
 		
@@ -49,12 +53,10 @@ func _physics_process(delta:float) -> void:
 		current_state = states.Blocking
 		
 	if Input.is_action_just_pressed("dodge"):
-		if ap.current_animation == "Dodge":
+		if current_state == states.Dodging:
 			return
-		ap.stop()
-		ap.play("Dodge",-1,dodge_animation_speed,false)
 		current_state = states.Dodging
-		asprite.play("dodge")
+		dodge_speed()
 		
 	
 	if direction.length() > 0:
@@ -64,3 +66,14 @@ func _physics_process(delta:float) -> void:
 		
 	move_and_slide()
 	
+func dodge_speed() -> void:
+	speed = 650
+	dodge_timer.start()
+
+
+func _on_dodge_timer_timeout() -> void:
+	speed = 200
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	print(area)

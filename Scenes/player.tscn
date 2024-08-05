@@ -1,46 +1,14 @@
-[gd_scene load_steps=32 format=3 uid="uid://4aag0r7aej6x"]
+[gd_scene load_steps=26 format=3 uid="uid://4aag0r7aej6x"]
 
-[ext_resource type="Texture2D" uid="uid://numh6f2hjpen" path="res://Scenes/player/player_sprite_sheet.png" id="1_b12m6"]
+[ext_resource type="Texture2D" uid="uid://dh5o6ypbv7rhj" path="res://Scenes/player/player_sprite_sheet.png" id="1_b12m6"]
+[ext_resource type="Material" uid="uid://cr77rchm7ctfg" path="res://Scenes/player_blur.tres" id="1_cbrgv"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_kk7c1"]
 [ext_resource type="Script" path="res://BasicIK.gd" id="2_jgah1"]
-[ext_resource type="Texture2D" uid="uid://b1vsqlw57imaq" path="res://Scenes/player/leg_spritesheet.png" id="3_oucah"]
-[ext_resource type="Texture2D" uid="uid://b4jnf7yu5ishw" path="res://Assets/Player/leg_spritesheet1.png" id="3_p5lyg"]
+[ext_resource type="Texture2D" uid="uid://cuq3cs65xox80" path="res://Scenes/player/leg_spritesheet.png" id="3_oucah"]
 [ext_resource type="Script" path="res://Scenes/Marker2D.gd" id="5_otpac"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmt6h"]
 radius = 16.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7glxx"]
-atlas = ExtResource("3_p5lyg")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w4dkv"]
-atlas = ExtResource("3_p5lyg")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p0cni"]
-atlas = ExtResource("3_p5lyg")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ck31v"]
-atlas = ExtResource("3_p5lyg")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pv30b"]
-atlas = ExtResource("3_p5lyg")
-region = Rect2(512, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uylf4"]
-atlas = ExtResource("3_p5lyg")
-region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vdq1s"]
-atlas = ExtResource("3_p5lyg")
-region = Rect2(768, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f7aky"]
-atlas = ExtResource("3_p5lyg")
-region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yeboh"]
 atlas = ExtResource("3_oucah")
@@ -76,35 +44,6 @@ region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ndsdx"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7glxx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w4dkv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p0cni")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ck31v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pv30b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uylf4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vdq1s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f7aky")
-}],
-"loop": false,
-"name": &"dodge",
-"speed": 50.0
-}, {
 "frames": [],
 "loop": false,
 "name": &"idle",
@@ -139,6 +78,12 @@ animations = [{
 "name": &"walk",
 "speed": 10.0
 }]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aipvh"]
+radius = 5.65685
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c1wn0"]
+radius = 5.38505
 
 [sub_resource type="Animation" id="Animation_vrto5"]
 resource_name = "Block"
@@ -510,6 +455,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
+material = ExtResource("1_cbrgv")
 script = ExtResource("1_kk7c1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -523,9 +469,7 @@ rotation = 1.5708
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Marker2D/Graphics"]
 sprite_frames = SubResource("SpriteFrames_ndsdx")
-animation = &"dodge"
-frame = 7
-frame_progress = 1.0
+animation = &"idle"
 
 [node name="ArmR" type="Node2D" parent="Marker2D/Graphics"]
 modulate = Color(0.219608, 0.219608, 0.219608, 1)
@@ -538,6 +482,7 @@ position = Vector2(45, 0)
 rotation = -0.0267882
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmR"]
+rotation = -0.73189
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
 position = Vector2(11, 0)
@@ -546,7 +491,8 @@ region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
-position = Vector2(23.0031, 0)
+position = Vector2(23.0031, -1.90735e-06)
+rotation = -1.87908
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(10, 1)
@@ -556,7 +502,13 @@ region_rect = Rect2(95, 27, 28, 14)
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(21, 0)
-rotation = -0.0267882
+rotation = -0.051004
+
+[node name="Area2D" type="Area2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand/Area2D"]
+position = Vector2(5.82028, 0.354265)
+shape = SubResource("CircleShape2D_aipvh")
 
 [node name="Hand" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand"]
 position = Vector2(5.82018, 0.354264)
@@ -574,7 +526,7 @@ position = Vector2(-44, 0)
 rotation = -3.14159
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmL"]
-rotation = 3.12972
+rotation = -2.46729
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
 position = Vector2(10.9857, -3.14713e-05)
@@ -584,8 +536,8 @@ region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
-position = Vector2(23.0034, -7.45058e-08)
-rotation = 0.0248776
+position = Vector2(23.0034, 9.53674e-07)
+rotation = 1.76047
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(9.98098, -0.973703)
@@ -596,7 +548,14 @@ region_rect = Rect2(95, 27, 28, 14)
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(21, 0)
-rotation = -0.0130026
+rotation = 0.297006
+
+[node name="Area2D" type="Area2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/Hand"]
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/Hand/Area2D"]
+position = Vector2(6.29993, 0.55626)
+shape = SubResource("CircleShape2D_c1wn0")
 
 [node name="Hand" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/Hand"]
 position = Vector2(5.38285, 0.157818)
@@ -624,3 +583,14 @@ libraries = {
 }
 autoplay = "Idle"
 speed_scale = 2.0
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="Dodge_timer" type="Timer" parent="Timers"]
+wait_time = 0.25
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="area_entered" from="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Timers/Dodge_timer" to="." method="_on_dodge_timer_timeout"]
