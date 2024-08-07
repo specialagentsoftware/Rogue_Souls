@@ -13,8 +13,10 @@ enum states {Attacking, Walking, Idling, Blocking, Dodging}
 @onready var ap :AnimationPlayer = $Marker2D/Graphics/AnimationPlayer
 @onready var current_state = states.Idling
 @onready var dodge_timer: Timer = $Timers/Dodge_timer
-@onready var shadow_timer: Timer = $Timers/Shadow_timer
 @export var ghost: PackedScene
+@onready var particles : GPUParticles2D = $Marker2D/GPUParticles2D
+@onready var dodge_cooldown_timer = $Timers/Dodge_cooldown
+@onready var can_dodge: bool = true
 
 func get_movement() -> Vector2:
 	var input: Vector2 = Vector2()
@@ -55,11 +57,11 @@ func _physics_process(delta:float) -> void:
 		current_state = states.Blocking
 		
 	if Input.is_action_just_pressed("dodge"):
-		if current_state == states.Dodging:
+		if (direction.x == 0 and direction.y == 0) or current_state == states.Dodging or can_dodge == false:
 			return
 		current_state = states.Dodging
 		dodge_speed()
-		shadow_timer.start()
+		
 		
 	
 	if direction.length() > 0:
@@ -71,18 +73,20 @@ func _physics_process(delta:float) -> void:
 	
 func dodge_speed() -> void:
 	speed = 650
+	particles.emitting = true
+	asprite.speed_scale = 3
+	can_dodge = false
 	dodge_timer.start()
 
 func _on_dodge_timer_timeout() -> void:
 	speed = 200
+	asprite.speed_scale = 1
+	particles.emitting = false
+	dodge_cooldown_timer.start()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	print(area)
 
-func _add_ghost() -> void:
-	var ghost = ghost.instantiate()
-	ghost.set_property(position,Vector2(1,1))
-	get_tree().current_scene.add_child(ghost)
-	
-func _on_shadow_timer_timeout():
-	_add_ghost()
+
+func _on_dodge_cooldown_timeout() -> void:
+	can_dodge = true
