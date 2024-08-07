@@ -11,11 +11,10 @@ enum states {Attacking, Walking, Idling, Blocking, Dodging}
 @export var dodge_animation_speed :float = 50
 @onready var asprite : AnimatedSprite2D = $Marker2D/Graphics/AnimatedSprite2D
 @onready var ap :AnimationPlayer = $Marker2D/Graphics/AnimationPlayer
-@onready var current_state = states.Idling
+@onready var current_state: states = states.Idling
 @onready var dodge_timer: Timer = $Timers/Dodge_timer
-@export var ghost: PackedScene
 @onready var particles : GPUParticles2D = $Marker2D/GPUParticles2D
-@onready var dodge_cooldown_timer = $Timers/Dodge_cooldown
+@onready var dodge_cooldown_timer: Timer = $Timers/Dodge_cooldown
 @onready var can_dodge: bool = true
 
 func get_movement() -> Vector2:
@@ -30,7 +29,7 @@ func get_movement() -> Vector2:
 		input.x -= 1
 	return input
 
-func _physics_process(delta:float) -> void:
+func _physics_process(_delta:float) -> void:
 	var direction: Vector2 = get_movement()
 	
 	if direction.x == 0 and direction.y == 0 and (ap.current_animation != "Punch" or ap.current_animation != "Block"):
@@ -62,8 +61,6 @@ func _physics_process(delta:float) -> void:
 		current_state = states.Dodging
 		dodge_speed()
 		
-		
-	
 	if direction.length() > 0:
 		velocity = velocity.lerp(direction.normalized() * speed, acceleration)
 	else:
@@ -72,6 +69,7 @@ func _physics_process(delta:float) -> void:
 	move_and_slide()
 	
 func dodge_speed() -> void:
+	ap.play("Dash")
 	speed = 650
 	particles.emitting = true
 	asprite.speed_scale = 3
