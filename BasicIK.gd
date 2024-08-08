@@ -21,7 +21,7 @@ func update_arm_lens():
 	lower_arm_len = hand.global_position.distance_to(elbow.global_position)
 	max_len = upper_arm_len + lower_arm_len
 
-func _process(delta):
+func _process(_delta):
 	if Engine.is_editor_hint():
 		update_arm_lens() # arm sizing can be changed whenever while in editor
 	
@@ -61,8 +61,8 @@ func get_elbow_pos_local():
 	if is_nan(relative_elbow_angle):
 		relative_elbow_angle = 0.0
 	
-	var sign:int = 1
+	var s:int = 1
 	if elbow_flipped:
-		sign = -1
+		s = -1
 	
-	return Vector2.RIGHT.rotated(sign * relative_elbow_angle + local_hand_pos.angle()) * upper_arm_len
+	return Vector2.RIGHT.rotated(s * relative_elbow_angle + local_hand_pos.angle()) * upper_arm_len

@@ -134,6 +134,7 @@ func _level_up() -> void:
 	lvl += 1
 	lvl_bar.text = str(lvl)
 	ap.play("flash_lvl")
+	Globals.open_upgrade_menu()
 	
 func _process(_delta: float) -> void:
 	if stamina < 20:

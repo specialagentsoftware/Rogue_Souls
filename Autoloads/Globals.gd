@@ -10,6 +10,9 @@ var save:SaveData
 # temp - I'm not wild about preloads, but this menu is fairly light (to revise in a future version)
 var settings_menu_scene:PackedScene = preload("res://Menus/settings_menu.tscn")
 var settings_menu :SettingsMenu = null
+
+var upgrade_menu_scene: PackedScene = preload("res://Scenes/upgrade_menu.tscn")
+var upgrade_menu: UpgradeMenu = null
  
 func _ready() -> void:
 	user_prefs = UserPrefs.load_or_create()
@@ -54,3 +57,10 @@ func open_settings_menu() -> void:
 		get_tree().root.add_child(settings_menu)
 	else:
 		push_warning('settings menu already exists in this scene')
+		
+func open_upgrade_menu() -> void:
+	if not upgrade_menu:
+		upgrade_menu = upgrade_menu_scene.instantiate()
+		get_tree().root.add_child(upgrade_menu)
+	else:
+		push_warning('upgrade menu already exists in this scene')
