@@ -58,9 +58,10 @@ func open_settings_menu() -> void:
 	else:
 		push_warning('settings menu already exists in this scene')
 		
-func open_upgrade_menu() -> void:
+func open_upgrade_menu(level:int) -> void:
 	if not upgrade_menu:
 		upgrade_menu = upgrade_menu_scene.instantiate()
 		get_tree().root.add_child(upgrade_menu)
+		upgrade_menu._set_level(level)
 	else:
 		push_warning('upgrade menu already exists in this scene')

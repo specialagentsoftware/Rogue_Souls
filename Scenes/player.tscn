@@ -675,19 +675,19 @@ tracks/3/keys = {
 "values": [-0.409817, -0.409817, -0.409817]
 }
 
-[sub_resource type="Animation" id="Animation_mo1vi"]
-resource_name = "flash_stamina"
+[sub_resource type="Animation" id="Animation_v284c"]
+resource_name = "flash_health"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Camera2D/Stamina:theme_override_styles/background:bg_color")
-tracks/0/interp = 2
+tracks/0/path = NodePath("../../Camera2D/Health:self_modulate")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
+"times": PackedFloat32Array(0, 0.5, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 0.141176, 0, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 0.447059, 0.360784, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_k6ijh"]
@@ -706,19 +706,19 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(0, 0.811765, 0.00784314, 1), Color(1, 1, 1, 1), Color(0, 0.811765, 0.00784314, 1), Color(1, 1, 1, 1), Color(0, 0.811765, 0.00784314, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_v284c"]
-resource_name = "flash_health"
+[sub_resource type="Animation" id="Animation_mo1vi"]
+resource_name = "flash_stamina"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Camera2D/Health:self_modulate")
-tracks/0/interp = 1
+tracks/0/path = NodePath("../../Camera2D/Stamina:theme_override_styles/background:bg_color")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.9),
+"times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 0.447059, 0.360784, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 0.141176, 0, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_76m1o"]
@@ -770,7 +770,7 @@ bg_color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcb8t"]
 bg_color = Color(0, 0.592157, 0.0745098, 1)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 material = ExtResource("1_cbrgv")
 script = ExtResource("1_kk7c1")
 
@@ -807,7 +807,7 @@ region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
-position = Vector2(23.0031, -9.53674e-07)
+position = Vector2(23.0031, -2.86102e-06)
 rotation = -1.70069
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
@@ -852,7 +852,7 @@ region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
-position = Vector2(23.0034, -2.86102e-06)
+position = Vector2(23.0034, 9.53674e-07)
 rotation = 1.76364
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
@@ -968,8 +968,16 @@ rounded = true
 [node name="Panel" type="Panel" parent="Camera2D"]
 offset_left = -635.0
 offset_top = -358.0
-offset_right = -589.0
+offset_right = -581.0
 offset_bottom = -307.0
+scale = Vector2(4.44, 1.88)
+size_flags_horizontal = 0
+
+[node name="Panel2" type="Panel" parent="Camera2D"]
+offset_left = 505.0
+offset_top = -357.0
+offset_right = 532.0
+offset_bottom = -301.0
 scale = Vector2(4.44, 1.88)
 size_flags_horizontal = 0
 
@@ -979,6 +987,24 @@ offset_top = -355.0
 offset_right = -610.0
 offset_bottom = -332.0
 text = "HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPMAX" type="Label" parent="Camera2D"]
+offset_left = -437.0
+offset_top = -355.0
+offset_right = -394.0
+offset_bottom = -332.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="STMAX" type="Label" parent="Camera2D"]
+offset_left = -436.0
+offset_top = -333.0
+offset_right = -395.0
+offset_bottom = -310.0
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1009,11 +1035,135 @@ text = "LVL"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="StrengthStatLabel" type="Label" parent="Camera2D"]
+offset_left = 518.0
+offset_top = -357.0
+offset_right = 585.0
+offset_bottom = -334.0
+theme_override_font_sizes/font_size = 16
+text = "Strength"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedStatLabel" type="Label" parent="Camera2D"]
+offset_left = 518.0
+offset_top = -342.0
+offset_right = 566.0
+offset_bottom = -319.0
+theme_override_font_sizes/font_size = 16
+text = "Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StaminaStatLabel" type="Label" parent="Camera2D"]
+offset_left = 518.0
+offset_top = -325.0
+offset_right = 582.0
+offset_bottom = -302.0
+theme_override_font_sizes/font_size = 16
+text = "Stamina"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagicStatLabel" type="Label" parent="Camera2D"]
+offset_left = 518.0
+offset_top = -279.0
+offset_right = 564.0
+offset_bottom = -256.0
+theme_override_font_sizes/font_size = 16
+text = "Magic"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpecialStatLabel" type="Label" parent="Camera2D"]
+offset_left = 518.0
+offset_top = -310.0
+offset_right = 573.0
+offset_bottom = -287.0
+theme_override_font_sizes/font_size = 16
+text = "Special"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthStatLabel" type="Label" parent="Camera2D"]
+offset_left = 518.0
+offset_top = -294.0
+offset_right = 570.0
+offset_bottom = -271.0
+theme_override_font_sizes/font_size = 16
+text = "Health"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StrengthStat" type="Label" parent="Camera2D"]
+offset_left = 590.0
+offset_top = -355.0
+offset_right = 622.0
+offset_bottom = -332.0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedStat" type="Label" parent="Camera2D"]
+offset_left = 591.0
+offset_top = -340.0
+offset_right = 622.0
+offset_bottom = -317.0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StaminaStat" type="Label" parent="Camera2D"]
+offset_left = 590.0
+offset_top = -324.0
+offset_right = 622.0
+offset_bottom = -301.0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagicStat" type="Label" parent="Camera2D"]
+offset_left = 591.0
+offset_top = -278.0
+offset_right = 622.0
+offset_bottom = -255.0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpecialStat" type="Label" parent="Camera2D"]
+offset_left = 591.0
+offset_top = -309.0
+offset_right = 622.0
+offset_bottom = -286.0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthStat" type="Label" parent="Camera2D"]
+offset_left = 591.0
+offset_top = -293.0
+offset_right = 622.0
+offset_bottom = -270.0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="LVL" type="Label" parent="Camera2D"]
-offset_left = -533.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -524.0
 offset_top = -289.0
-offset_right = -498.0
+offset_right = -489.0
 offset_bottom = -266.0
+grow_horizontal = 0
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1

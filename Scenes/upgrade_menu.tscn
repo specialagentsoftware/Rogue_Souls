@@ -1,20 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3tncs40jjaje"]
+[gd_scene load_steps=9 format=3 uid="uid://b3tncs40jjaje"]
 
 [ext_resource type="Script" path="res://Scenes/upgrade_menu.gd" id="1_06qg8"]
+[ext_resource type="Texture2D" uid="uid://cko8rmdse865r" path="res://Assets/Strength.png" id="2_kocfu"]
+[ext_resource type="Texture2D" uid="uid://ccm5lf1dc645" path="res://Assets/Speed.png" id="3_a5wvi"]
+[ext_resource type="Texture2D" uid="uid://ikh180ef6fy1" path="res://Assets/Magic.png" id="4_ky3vb"]
+[ext_resource type="Texture2D" uid="uid://b2gl2io8nv47y" path="res://Assets/Stamina.png" id="5_0eb15"]
+[ext_resource type="Texture2D" uid="uid://cc0ksxy0bwf1v" path="res://Assets/Health.png" id="6_x6vo1"]
+[ext_resource type="Texture2D" uid="uid://dopsn4lidxn3x" path="res://Assets/Special.png" id="7_whyho"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wn3s6"]
+bg_color = Color(0.164706, 0.164706, 0.164706, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="upgrade_menu" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -381.0
-offset_top = -306.0
-offset_right = 419.0
-offset_bottom = 344.0
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -160.0
+offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 script = ExtResource("1_06qg8")
 
 [node name="Panel" type="Panel" parent="."]
@@ -24,21 +39,142 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wn3s6")
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -397.0
-offset_top = -11.0
-offset_right = 399.0
-offset_bottom = 43.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 796.0
+offset_bottom = 54.0
 theme_override_font_sizes/font_size = 34
-text = "Test Label"
+text = "Upgrade Reward Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LevelInfo" type="Label" parent="Panel"]
+layout_mode = 1
+offset_top = 48.0
+offset_right = 796.0
+offset_bottom = 102.0
+theme_override_font_sizes/font_size = 21
+text = "Level"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelNumber" type="Label" parent="Panel"]
+layout_mode = 1
+offset_top = 87.0
+offset_right = 796.0
+offset_bottom = 118.0
+theme_override_font_sizes/font_size = 21
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -35.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Close"
+
+[node name="GridRows" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 94.0
+offset_right = -25.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -100
+alignment = 1
+
+[node name="Row1" type="HBoxContainer" parent="Panel/GridRows"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Strength" type="Button" parent="Panel/GridRows/Row1"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 5
+text = "Strength"
+icon = ExtResource("2_kocfu")
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+
+[node name="Speed" type="Button" parent="Panel/GridRows/Row1"]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 5
+text = "Speed"
+icon = ExtResource("3_a5wvi")
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+
+[node name="Magic" type="Button" parent="Panel/GridRows/Row1"]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 5
+text = "Magic"
+icon = ExtResource("4_ky3vb")
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+
+[node name="Row2" type="HBoxContainer" parent="Panel/GridRows"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Stamina" type="Button" parent="Panel/GridRows/Row2"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 5
+text = "Stamina"
+icon = ExtResource("5_0eb15")
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+
+[node name="Health" type="Button" parent="Panel/GridRows/Row2"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 5
+text = "Health"
+icon = ExtResource("6_x6vo1")
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+
+[node name="Special" type="Button" parent="Panel/GridRows/Row2"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 5
+text = "Special"
+icon = ExtResource("7_whyho")
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+
+[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/GridRows/Row1/Strength" to="." method="_on_strength_pressed"]
+[connection signal="pressed" from="Panel/GridRows/Row1/Speed" to="." method="_on_speed_pressed"]
+[connection signal="pressed" from="Panel/GridRows/Row1/Magic" to="." method="_on_magic_pressed"]
+[connection signal="pressed" from="Panel/GridRows/Row2/Stamina" to="." method="_on_stamina_pressed"]
+[connection signal="pressed" from="Panel/GridRows/Row2/Health" to="." method="_on_health_pressed"]
+[connection signal="pressed" from="Panel/GridRows/Row2/Special" to="." method="_on_special_pressed"]
