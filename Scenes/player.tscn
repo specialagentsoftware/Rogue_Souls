@@ -928,7 +928,6 @@ zoom = Vector2(1.5, 1.5)
 
 [node name="Panel" type="Panel" parent="Camera2D"]
 self_modulate = Color(0, 0, 0, 1)
-z_index = 1
 offset_left = -635.0
 offset_top = -358.0
 offset_right = -581.0
@@ -938,7 +937,6 @@ size_flags_horizontal = 0
 
 [node name="Panel2" type="Panel" parent="Camera2D"]
 self_modulate = Color(0, 0, 0, 1)
-z_index = 1
 offset_left = 505.0
 offset_top = -357.0
 offset_right = 532.0

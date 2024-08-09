@@ -6,6 +6,10 @@ class_name UpgradeMenu extends Control
 func _ready() -> void:
 	get_tree().paused = true
 	
+	var mod_x = p.position.x - 400
+	var mod_y = p.position.y - 325
+	position = Vector2(mod_x,mod_y)
+	
 func _set_level(level:int):
 	level_number.text = str(level)
 
