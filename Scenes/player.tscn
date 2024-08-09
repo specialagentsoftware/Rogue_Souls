@@ -926,6 +926,26 @@ autostart = true
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
 
+[node name="Panel" type="Panel" parent="Camera2D"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 1
+offset_left = -635.0
+offset_top = -358.0
+offset_right = -581.0
+offset_bottom = -307.0
+scale = Vector2(4.44, 1.88)
+size_flags_horizontal = 0
+
+[node name="Panel2" type="Panel" parent="Camera2D"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 1
+offset_left = 505.0
+offset_top = -357.0
+offset_right = 532.0
+offset_bottom = -301.0
+scale = Vector2(4.44, 1.88)
+size_flags_horizontal = 0
+
 [node name="Health" type="ProgressBar" parent="Camera2D"]
 z_index = 1
 offset_left = -609.0
@@ -964,22 +984,6 @@ theme_override_styles/background = SubResource("StyleBoxFlat_14rmp")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gcb8t")
 value = 50.0
 rounded = true
-
-[node name="Panel" type="Panel" parent="Camera2D"]
-offset_left = -635.0
-offset_top = -358.0
-offset_right = -581.0
-offset_bottom = -307.0
-scale = Vector2(4.44, 1.88)
-size_flags_horizontal = 0
-
-[node name="Panel2" type="Panel" parent="Camera2D"]
-offset_left = 505.0
-offset_top = -357.0
-offset_right = 532.0
-offset_bottom = -301.0
-scale = Vector2(4.44, 1.88)
-size_flags_horizontal = 0
 
 [node name="HPLBL" type="Label" parent="Camera2D"]
 offset_left = -633.0

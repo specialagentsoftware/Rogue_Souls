@@ -15,13 +15,22 @@ enum states {Attacking, Walking, Idling, Blocking, Dodging}
 @export var st_max: int = 100
 @export var xp: int = 0
 @export var lvl: int = 1
+@onready var current_state: states = states.Idling
+@onready var can_dodge: bool = true
+@onready var player_stats: Dictionary = {
+	"strength":1,
+	"speed":1,
+	"magic":1,
+	"stamina":1,
+	"health":1,
+	"special":1
+}
+#object references
 @onready var asprite : AnimatedSprite2D = $Marker2D/Graphics/AnimatedSprite2D
 @onready var ap :AnimationPlayer = $Marker2D/Graphics/AnimationPlayer
-@onready var current_state: states = states.Idling
 @onready var dodge_timer: Timer = $Timers/Dodge_timer
 @onready var particles : GPUParticles2D = $Marker2D/GPUParticles2D
 @onready var dodge_cooldown_timer: Timer = $Timers/Dodge_cooldown
-@onready var can_dodge: bool = true
 @onready var health_bar: ProgressBar = $Camera2D/Health
 @onready var stamina_bar: ProgressBar = $Camera2D/Stamina
 @onready var experience_bar: ProgressBar = $Camera2D/Experience
@@ -35,41 +44,12 @@ enum states {Attacking, Walking, Idling, Blocking, Dodging}
 @onready var hpmax: Label = $Camera2D/HPMAX
 @onready var stmax: Label = $Camera2D/STMAX
 
-@onready var player_stats: Dictionary = {
-	"strength":1,
-	"speed":1,
-	"magic":1,
-	"stamina":1,
-	"health":1,
-	"special":1
-}
-
-func _set_strength(add:int):
-	player_stats.strength += add
-
-func _set_speed(add:int):
-	player_stats.speed += add
-	
-func _set_magic(add:int):
-	player_stats.magic += add
-
-func _set_stamina(add:int):
-	player_stats.stamina += add
-	st_max += 20
-	
-func _set_health(add:int):
-	player_stats.health += add
-	hp_max += 20
-	
-func _set_special(add:int):
-	player_stats.special += add
-		
 func _ready() -> void:
 	stamina_bar.value = st_max
 	health_bar.value = hp_max
 	experience_bar.value = xp
 	lvl_bar.text = str(lvl)
-
+		
 func get_movement() -> Vector2:
 	var input: Vector2 = Vector2()
 	if Input.is_action_pressed('back'):
@@ -137,18 +117,26 @@ func dodge_speed() -> void:
 	asprite.speed_scale = 3
 	can_dodge = false
 	dodge_timer.start()
+	
+func _set_strength(add:int):
+	player_stats.strength += add
 
-func _on_dodge_timer_timeout() -> void:
-	speed = 200
-	asprite.speed_scale = 1
-	particles.emitting = false
-	dodge_cooldown_timer.start()
+func _set_speed(add:int):
+	player_stats.speed += add
+	
+func _set_magic(add:int):
+	player_stats.magic += add
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	print(area)
-
-func _on_dodge_cooldown_timeout() -> void:
-	can_dodge = true
+func _set_stamina(add:int):
+	player_stats.stamina += add
+	st_max += 20
+	
+func _set_health(add:int):
+	player_stats.health += add
+	hp_max += 20
+	
+func _set_special(add:int):
+	player_stats.special += add
 	
 func _take_stamina(cost:int) -> void:
 	stamina -= clampi(cost,0,st_max)
@@ -204,3 +192,15 @@ func _on_stamina_regen_timer_timeout() -> void:
 
 func _on_health_regen_timer_timeout() -> void:
 	health += clampi(5,0,hp_max)
+	
+func _on_dodge_timer_timeout() -> void:
+	speed = 200
+	asprite.speed_scale = 1
+	particles.emitting = false
+	dodge_cooldown_timer.start()
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	print(area)
+
+func _on_dodge_cooldown_timeout() -> void:
+	can_dodge = true
