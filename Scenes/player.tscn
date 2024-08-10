@@ -1,11 +1,52 @@
-[gd_scene load_steps=39 format=3 uid="uid://4aag0r7aej6x"]
+[gd_scene load_steps=40 format=3 uid="uid://4aag0r7aej6x"]
 
 [ext_resource type="Texture2D" uid="uid://dh5o6ypbv7rhj" path="res://Scenes/player/player_sprite_sheet.png" id="1_b12m6"]
-[ext_resource type="Material" uid="uid://cr77rchm7ctfg" path="res://Scenes/player_blur.tres" id="1_cbrgv"]
-[ext_resource type="Script" path="res://Scenes/player.gd" id="1_kk7c1"]
-[ext_resource type="Script" path="res://BasicIK.gd" id="2_jgah1"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_kk7c1"]
+[ext_resource type="Script" path="res://Scripts/BasicIK.gd" id="2_jgah1"]
 [ext_resource type="Texture2D" uid="uid://cuq3cs65xox80" path="res://Scenes/player/leg_spritesheet.png" id="3_oucah"]
-[ext_resource type="Script" path="res://Scenes/Marker2D.gd" id="5_otpac"]
+[ext_resource type="Script" path="res://Scripts/Marker2D.gd" id="5_otpac"]
+
+[sub_resource type="Shader" id="Shader_475lk"]
+code = "shader_type canvas_item;
+uniform vec2 dir = vec2(0,0);
+uniform int quality = 4;
+
+void vertex(){
+	vec2 blurSize = abs(dir) * 2.0;
+	VERTEX *= blurSize + 1.0;
+	UV = (UV - 0.5) * (blurSize + 1.0) + 0.5;
+}
+
+float insideUnitSquare(vec2 v) {
+    vec2 s = step(vec2(0.0), v) - step(vec2(1.0), v);
+    return s.x * s.y;   
+}
+
+void fragment(){
+	float inSquare = insideUnitSquare(UV);
+	float numSamples = inSquare;
+	COLOR = texture(TEXTURE, UV) * inSquare;
+	vec2 stepSize = dir/(float(quality));
+	vec2 uv;
+	for(int i = 1; i <= quality; i++){
+		uv = UV + stepSize * float(i);
+		inSquare = insideUnitSquare(uv);
+		numSamples += inSquare;
+		COLOR += texture(TEXTURE, uv) * inSquare;
+		
+		uv = UV - stepSize * float(i);
+		inSquare = insideUnitSquare(uv);
+		numSamples += inSquare;
+		COLOR += texture(TEXTURE, uv) * inSquare;
+	}
+	COLOR.rgb /= numSamples;
+	COLOR.a /= float(quality)*2.0 + 1.0;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bhbjv"]
+shader = SubResource("Shader_475lk")
+shader_parameter/dir = Vector2(0, 0)
+shader_parameter/quality = 4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmt6h"]
 radius = 16.0
@@ -771,7 +812,7 @@ bg_color = Color(1, 1, 1, 1)
 bg_color = Color(0, 0.592157, 0.0745098, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-material = ExtResource("1_cbrgv")
+material = SubResource("ShaderMaterial_bhbjv")
 script = ExtResource("1_kk7c1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -798,7 +839,6 @@ position = Vector2(45, 0)
 rotation = -0.0267882
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmR"]
-rotation = -0.703409
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
 position = Vector2(10.6266, -0.274835)
@@ -807,8 +847,7 @@ region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
-position = Vector2(23.0031, -2.86102e-06)
-rotation = -1.70069
+position = Vector2(23, 0)
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(10, 1)
@@ -818,7 +857,7 @@ region_rect = Rect2(95, 27, 28, 14)
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(21, 0)
-rotation = -0.736445
+rotation = -0.0267882
 
 [node name="Area2D" type="Area2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand"]
 
@@ -842,7 +881,7 @@ position = Vector2(-44, 0)
 rotation = -3.14159
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmL"]
-rotation = -2.3617
+rotation = 3.14159
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
 position = Vector2(10.9857, -3.14713e-05)
@@ -852,8 +891,7 @@ region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
-position = Vector2(23.0034, 9.53674e-07)
-rotation = 1.76364
+position = Vector2(23, 3.63798e-12)
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(9.98098, -0.973703)
@@ -864,7 +902,6 @@ region_rect = Rect2(95, 27, 28, 14)
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(21, 0)
-rotation = 0.462627
 
 [node name="Area2D" type="Area2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/Hand"]
 
