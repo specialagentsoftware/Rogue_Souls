@@ -44,6 +44,7 @@ enum states {Attacking, Walking, Idling, Blocking, Dodging}
 @onready var hpmax: Label = $Camera2D/HPMAX
 @onready var stmax: Label = $Camera2D/STMAX
 
+
 func _ready() -> void:
 	stamina_bar.value = st_max
 	health_bar.value = hp_max
@@ -68,10 +69,15 @@ func _physics_process(_delta:float) -> void:
 	if direction.x == 0 and direction.y == 0 and (ap.current_animation != "Punch" or ap.current_animation != "Block"):
 		current_state = states.Idling
 		asprite.visible = false
-		#ap.play("Idle")
+		#drop_shadow_legs.visible = false
 	elif (ap.current_animation != "Punch" or ap.current_animation != "Block"):
 		asprite.visible = true
-		asprite.play("walk")
+		#drop_shadow_legs.visible = true
+		if direction.x >= 1:
+			asprite.play_backwards("walk")
+		else:
+			asprite.play("walk")
+		
 		current_state = states.Walking
 		
 	if Input.is_action_just_pressed("punch") and stamina > 10:

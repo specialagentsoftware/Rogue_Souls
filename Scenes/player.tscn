@@ -1,10 +1,13 @@
-[gd_scene load_steps=40 format=3 uid="uid://4aag0r7aej6x"]
+[gd_scene load_steps=44 format=3 uid="uid://4aag0r7aej6x"]
 
 [ext_resource type="Texture2D" uid="uid://dh5o6ypbv7rhj" path="res://Scenes/player/player_sprite_sheet.png" id="1_b12m6"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_kk7c1"]
 [ext_resource type="Script" path="res://Scripts/BasicIK.gd" id="2_jgah1"]
 [ext_resource type="Texture2D" uid="uid://cuq3cs65xox80" path="res://Scenes/player/leg_spritesheet.png" id="3_oucah"]
+[ext_resource type="PackedScene" uid="uid://w636n2nkognp" path="res://vfx/drop_shadow.tscn" id="4_b608u"]
 [ext_resource type="Script" path="res://Scripts/Marker2D.gd" id="5_otpac"]
+[ext_resource type="Texture2D" uid="uid://810i0n2wmmai" path="res://vfx/vignette_2.png" id="7_te6s1"]
+[ext_resource type="Texture2D" uid="uid://crip5crblwv1r" path="res://vfx/light_area.png" id="8_0l2nd"]
 
 [sub_resource type="Shader" id="Shader_475lk"]
 code = "shader_type canvas_item;
@@ -811,6 +814,9 @@ bg_color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcb8t"]
 bg_color = Color(0, 0.592157, 0.0745098, 1)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jochu"]
+blend_mode = 3
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 material = SubResource("ShaderMaterial_bhbjv")
 script = ExtResource("1_kk7c1")
@@ -826,7 +832,10 @@ rotation = 1.5708
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Marker2D/Graphics"]
 sprite_frames = SubResource("SpriteFrames_ndsdx")
-animation = &"idle"
+animation = &"walk"
+autoplay = "walk"
+frame = 2
+frame_progress = 0.335255
 
 [node name="ArmR" type="Node2D" parent="Marker2D/Graphics"]
 modulate = Color(0.219608, 0.219608, 0.219608, 1)
@@ -846,6 +855,9 @@ texture = ExtResource("1_b12m6")
 region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
+[node name="DropShadow" parent="Marker2D/Graphics/ArmR/Shoulder/UpperArm" instance=ExtResource("4_b608u")]
+offset_amnt = 12
+
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
 position = Vector2(23, 0)
 
@@ -854,6 +866,9 @@ position = Vector2(10, 1)
 texture = ExtResource("1_b12m6")
 region_enabled = true
 region_rect = Rect2(95, 27, 28, 14)
+
+[node name="DropShadow" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow/LowerArm" instance=ExtResource("4_b608u")]
+offset_amnt = 12
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(21, 0)
@@ -870,6 +885,9 @@ position = Vector2(5.82018, 0.354264)
 texture = ExtResource("1_b12m6")
 region_enabled = true
 region_rect = Rect2(79, 11, 13, 10)
+
+[node name="DropShadow" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand/Hand" instance=ExtResource("4_b608u")]
+offset_amnt = 12
 
 [node name="ArmL" type="Node2D" parent="Marker2D/Graphics"]
 modulate = Color(0.219608, 0.219608, 0.219608, 1)
@@ -890,6 +908,9 @@ flip_v = true
 region_enabled = true
 region_rect = Rect2(92, 45, 31, 16)
 
+[node name="DropShadow" parent="Marker2D/Graphics/ArmL/Shoulder/UpperArm" instance=ExtResource("4_b608u")]
+offset_amnt = 12
+
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
 position = Vector2(23, 3.63798e-12)
 
@@ -899,6 +920,9 @@ texture = ExtResource("1_b12m6")
 flip_v = true
 region_enabled = true
 region_rect = Rect2(95, 27, 28, 14)
+
+[node name="DropShadow" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/LowerArm" instance=ExtResource("4_b608u")]
+offset_amnt = 12
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(21, 0)
@@ -916,11 +940,17 @@ flip_v = true
 region_enabled = true
 region_rect = Rect2(79, 11, 13, 10)
 
+[node name="DropShadow" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/Hand/Hand" instance=ExtResource("4_b608u")]
+offset_amnt = 12
+
 [node name="Body" type="Sprite2D" parent="Marker2D/Graphics"]
 self_modulate = Color(0.196078, 0.196078, 0.196078, 1)
 texture = ExtResource("1_b12m6")
 region_enabled = true
 region_rect = Rect2(84, 67, 42, 28)
+
+[node name="DropShadow" parent="Marker2D/Graphics/Body" instance=ExtResource("4_b608u")]
+offset_amnt = 8
 
 [node name="Head" type="Sprite2D" parent="Marker2D/Graphics"]
 self_modulate = Color(0.160784, 0.160784, 0.160784, 1)
@@ -928,6 +958,8 @@ position = Vector2(0, -5)
 texture = ExtResource("1_b12m6")
 region_enabled = true
 region_rect = Rect2(98, 100, 19, 21)
+
+[node name="DropShadow" parent="Marker2D/Graphics/Head" instance=ExtResource("4_b608u")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Marker2D/Graphics"]
 libraries = {
@@ -1206,6 +1238,24 @@ grow_horizontal = 0
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D/CanvasLayer"]
+material = SubResource("CanvasItemMaterial_jochu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_te6s1")
+
+[node name="PointLight2D" type="PointLight2D" parent="Camera2D"]
+position = Vector2(-4, 0)
+blend_mode = 2
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.843137)
+texture = ExtResource("8_0l2nd")
 
 [connection signal="area_entered" from="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="Timers/Dodge_timer" to="." method="_on_dodge_timer_timeout"]
