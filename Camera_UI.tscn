@@ -1,0 +1,342 @@
+[gd_scene load_steps=10 format=3 uid="uid://daivv562qvb1j"]
+
+[ext_resource type="Texture2D" uid="uid://810i0n2wmmai" path="res://vfx/vignette_2.png" id="1_3gjpx"]
+[ext_resource type="Texture2D" uid="uid://crip5crblwv1r" path="res://vfx/light_area.png" id="2_fot6k"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jochu"]
+blend_mode = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc8wo"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5rmp0"]
+bg_color = Color(1, 0, 0.247059, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7awki"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6wub"]
+bg_color = Color(0.0627451, 0.262745, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_14rmp"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcb8t"]
+bg_color = Color(0, 0.592157, 0.0745098, 1)
+
+[node name="Camera2D" type="Camera2D"]
+zoom = Vector2(1.5, 1.5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 20
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+material = SubResource("CanvasItemMaterial_jochu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_3gjpx")
+
+[node name="Health" type="ProgressBar" parent="CanvasLayer"]
+z_index = 1
+offset_left = 35.0
+offset_top = 9.0
+offset_right = 148.0
+offset_bottom = 32.0
+scale = Vector2(1, 0.909)
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_yc8wo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5rmp0")
+value = 50.0
+rounded = true
+
+[node name="Stamina" type="ProgressBar" parent="CanvasLayer"]
+z_index = 1
+offset_left = 35.0
+offset_top = 32.0
+offset_right = 148.0
+offset_bottom = 55.0
+scale = Vector2(1, 0.909)
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_7awki")
+theme_override_styles/fill = SubResource("StyleBoxFlat_i6wub")
+value = 50.0
+rounded = true
+
+[node name="Experience" type="ProgressBar" parent="CanvasLayer"]
+z_index = 1
+offset_left = 35.0
+offset_top = 55.0
+offset_right = 148.0
+offset_bottom = 78.0
+scale = Vector2(1, 0.909)
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_14rmp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gcb8t")
+value = 50.0
+rounded = true
+
+[node name="HPLBL" type="Label" parent="CanvasLayer"]
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 31.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 16
+text = "HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPMAX" type="Label" parent="CanvasLayer"]
+offset_left = 150.0
+offset_top = 8.0
+offset_right = 180.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="STMAX" type="Label" parent="CanvasLayer"]
+offset_left = 154.0
+offset_top = 31.0
+offset_right = 176.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="STLBL" type="Label" parent="CanvasLayer"]
+offset_left = 10.0
+offset_top = 29.0
+offset_right = 28.0
+offset_bottom = 52.0
+theme_override_font_sizes/font_size = 16
+text = "ST"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XPLBL" type="Label" parent="CanvasLayer"]
+offset_left = 10.0
+offset_top = 53.0
+offset_right = 30.0
+offset_bottom = 76.0
+theme_override_font_sizes/font_size = 16
+text = "XP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LVLLBL" type="Label" parent="CanvasLayer"]
+offset_left = 60.0
+offset_top = 73.0
+offset_right = 88.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 16
+text = "LVL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StrengthStatLabel" type="Label" parent="CanvasLayer"]
+z_index = 20
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -125.0
+offset_top = 5.0
+offset_right = -58.0
+offset_bottom = 28.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "Strength"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedStatLabel" type="Label" parent="CanvasLayer"]
+z_index = 20
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -125.0
+offset_top = 24.0
+offset_right = -77.0
+offset_bottom = 47.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StaminaStatLabel" type="Label" parent="CanvasLayer"]
+z_index = 20
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -125.0
+offset_top = 43.0
+offset_right = -61.0
+offset_bottom = 66.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "Stamina"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagicStatLabel" type="Label" parent="CanvasLayer"]
+z_index = 20
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -125.0
+offset_top = 61.0
+offset_right = -79.0
+offset_bottom = 84.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "Magic"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpecialStatLabel" type="Label" parent="CanvasLayer"]
+z_index = 20
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -125.0
+offset_top = 80.0
+offset_right = -70.0
+offset_bottom = 103.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "Special"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthStatLabel" type="Label" parent="CanvasLayer"]
+z_index = 20
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -125.0
+offset_top = 101.0
+offset_right = -73.0
+offset_bottom = 124.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "Health"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StrengthStat" type="Label" parent="CanvasLayer"]
+z_index = 20
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_top = 6.0
+offset_right = -13.0
+offset_bottom = 29.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedStat" type="Label" parent="CanvasLayer"]
+z_index = 20
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
+offset_top = 25.0
+offset_right = -13.0
+offset_bottom = 48.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StaminaStat" type="Label" parent="CanvasLayer"]
+z_index = 20
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_top = 43.0
+offset_right = -13.0
+offset_bottom = 66.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagicStat" type="Label" parent="CanvasLayer"]
+z_index = 20
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
+offset_top = 61.0
+offset_right = -13.0
+offset_bottom = 84.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpecialStat" type="Label" parent="CanvasLayer"]
+z_index = 20
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
+offset_top = 80.0
+offset_right = -13.0
+offset_bottom = 103.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthStat" type="Label" parent="CanvasLayer"]
+z_index = 20
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
+offset_top = 101.0
+offset_right = -13.0
+offset_bottom = 124.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LVL" type="Label" parent="CanvasLayer"]
+offset_left = 97.0
+offset_top = 74.0
+offset_right = 130.0
+offset_bottom = 97.0
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-4, 0)
+blend_mode = 2
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.843137)
+texture = ExtResource("2_fot6k")

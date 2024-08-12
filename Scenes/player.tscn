@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://4aag0r7aej6x"]
+[gd_scene load_steps=37 format=3 uid="uid://4aag0r7aej6x"]
 
 [ext_resource type="Texture2D" uid="uid://dh5o6ypbv7rhj" path="res://Scenes/player/player_sprite_sheet.png" id="1_b12m6"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_kk7c1"]
@@ -6,8 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cuq3cs65xox80" path="res://Scenes/player/leg_spritesheet.png" id="3_oucah"]
 [ext_resource type="PackedScene" uid="uid://w636n2nkognp" path="res://vfx/drop_shadow.tscn" id="4_b608u"]
 [ext_resource type="Script" path="res://Scripts/Marker2D.gd" id="5_otpac"]
-[ext_resource type="Texture2D" uid="uid://810i0n2wmmai" path="res://vfx/vignette_2.png" id="7_te6s1"]
-[ext_resource type="Texture2D" uid="uid://crip5crblwv1r" path="res://vfx/light_area.png" id="8_0l2nd"]
+[ext_resource type="PackedScene" uid="uid://daivv562qvb1j" path="res://Camera_UI.tscn" id="7_c7prc"]
 
 [sub_resource type="Shader" id="Shader_475lk"]
 code = "shader_type canvas_item;
@@ -282,7 +281,7 @@ tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/path = NodePath("AnimatedSprite2D:self_modulate")
-tracks/8/interp = 1
+tracks/8/interp = 2
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
@@ -645,7 +644,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("../../Camera2D/Stamina:theme_override_styles/background:bg_color")
+tracks/14/path = NodePath("../../Camera2D/CanvasLayer/Stamina:theme_override_styles/background:bg_color")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -657,7 +656,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("../../Camera2D/LVL:self_modulate")
+tracks/15/path = NodePath("../../Camera2D/CanvasLayer/LVL:self_modulate")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -724,8 +723,8 @@ resource_name = "flash_health"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Camera2D/Health:self_modulate")
-tracks/0/interp = 1
+tracks/0/path = NodePath("../../Camera2D/CanvasLayer/Health:self_modulate")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 0.9),
@@ -740,7 +739,7 @@ length = 3.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Camera2D/LVL:self_modulate")
+tracks/0/path = NodePath("../../Camera2D/CanvasLayer/LVL:self_modulate")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -755,7 +754,7 @@ resource_name = "flash_stamina"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Camera2D/Stamina:theme_override_styles/background:bg_color")
+tracks/0/path = NodePath("../../Camera2D/CanvasLayer/Stamina:theme_override_styles/background:bg_color")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -765,9 +764,61 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 0.141176, 0, 1), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_dtt30"]
+resource_name = "Blocking"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArmL/HandMarker:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(13.9999, -29), Vector2(13.9999, -29)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArmL/HandMarker:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.135431, -0.135431]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmR/HandMarker:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-5.00011, -29), Vector2(-5.00011, -29)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ArmR/HandMarker:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-3.14054, -3.14054]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_76m1o"]
 _data = {
 "Block": SubResource("Animation_vrto5"),
+"Blocking": SubResource("Animation_dtt30"),
 "Dash": SubResource("Animation_hteab"),
 "Dodge": SubResource("Animation_x83ra"),
 "Idle": SubResource("Animation_f1tna"),
@@ -795,27 +846,6 @@ initial_velocity_min = 10.0
 initial_velocity_max = 40.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 color_ramp = SubResource("GradientTexture1D_xi5oa")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc8wo"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5rmp0"]
-bg_color = Color(1, 0, 0.247059, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7awki"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6wub"]
-bg_color = Color(0.0627451, 0.262745, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_14rmp"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcb8t"]
-bg_color = Color(0, 0.592157, 0.0745098, 1)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jochu"]
-blend_mode = 3
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 material = SubResource("ShaderMaterial_bhbjv")
@@ -848,6 +878,7 @@ position = Vector2(45, 0)
 rotation = -0.0267882
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmR"]
+rotation = -0.703391
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
 position = Vector2(10.6266, -0.274835)
@@ -859,7 +890,8 @@ region_rect = Rect2(92, 45, 31, 16)
 offset_amnt = 12
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
-position = Vector2(23, 0)
+position = Vector2(23, -2.86102e-06)
+rotation = -1.70056
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(10, 1)
@@ -872,7 +904,7 @@ offset_amnt = 12
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(21, 0)
-rotation = -0.0267882
+rotation = -0.736593
 
 [node name="Area2D" type="Area2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand"]
 
@@ -899,7 +931,7 @@ position = Vector2(-44, 0)
 rotation = -3.14159
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmL"]
-rotation = 3.14159
+rotation = -2.36173
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
 position = Vector2(10.9857, -3.14713e-05)
@@ -912,7 +944,8 @@ region_rect = Rect2(92, 45, 31, 16)
 offset_amnt = 12
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
-position = Vector2(23, 3.63798e-12)
+position = Vector2(23, -1.90735e-06)
+rotation = 1.7635
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(9.98098, -0.973703)
@@ -926,6 +959,7 @@ offset_amnt = 12
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(21, 0)
+rotation = 0.462794
 
 [node name="Area2D" type="Area2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/Hand"]
 
@@ -992,273 +1026,16 @@ autostart = true
 wait_time = 2.0
 autostart = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
+[node name="Punch_cooldown" type="Timer" parent="Timers"]
 
-[node name="Panel" type="Panel" parent="Camera2D"]
-self_modulate = Color(0, 0, 0, 1)
-offset_left = -635.0
-offset_top = -358.0
-offset_right = -581.0
-offset_bottom = -307.0
-scale = Vector2(4.44, 1.88)
-size_flags_horizontal = 0
+[node name="Block_cooldown" type="Timer" parent="Timers"]
 
-[node name="Panel2" type="Panel" parent="Camera2D"]
-self_modulate = Color(0, 0, 0, 1)
-offset_left = 505.0
-offset_top = -357.0
-offset_right = 532.0
-offset_bottom = -301.0
-scale = Vector2(4.44, 1.88)
-size_flags_horizontal = 0
-
-[node name="Health" type="ProgressBar" parent="Camera2D"]
-z_index = 1
-offset_left = -609.0
-offset_top = -354.0
-offset_right = -437.0
-offset_bottom = -331.0
-scale = Vector2(1, 0.909)
-size_flags_horizontal = 0
-theme_override_styles/background = SubResource("StyleBoxFlat_yc8wo")
-theme_override_styles/fill = SubResource("StyleBoxFlat_5rmp0")
-value = 50.0
-rounded = true
-
-[node name="Stamina" type="ProgressBar" parent="Camera2D"]
-z_index = 1
-offset_left = -609.0
-offset_top = -332.0
-offset_right = -437.0
-offset_bottom = -309.0
-scale = Vector2(1, 0.909)
-size_flags_horizontal = 0
-theme_override_styles/background = SubResource("StyleBoxFlat_7awki")
-theme_override_styles/fill = SubResource("StyleBoxFlat_i6wub")
-value = 50.0
-rounded = true
-
-[node name="Experience" type="ProgressBar" parent="Camera2D"]
-z_index = 1
-offset_left = -609.0
-offset_top = -310.0
-offset_right = -437.0
-offset_bottom = -287.0
-scale = Vector2(1, 0.909)
-size_flags_horizontal = 0
-theme_override_styles/background = SubResource("StyleBoxFlat_14rmp")
-theme_override_styles/fill = SubResource("StyleBoxFlat_gcb8t")
-value = 50.0
-rounded = true
-
-[node name="HPLBL" type="Label" parent="Camera2D"]
-offset_left = -633.0
-offset_top = -355.0
-offset_right = -610.0
-offset_bottom = -332.0
-text = "HP"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HPMAX" type="Label" parent="Camera2D"]
-offset_left = -437.0
-offset_top = -355.0
-offset_right = -394.0
-offset_bottom = -332.0
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="STMAX" type="Label" parent="Camera2D"]
-offset_left = -436.0
-offset_top = -333.0
-offset_right = -395.0
-offset_bottom = -310.0
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="STLBL" type="Label" parent="Camera2D"]
-offset_left = -633.0
-offset_top = -335.0
-offset_right = -610.0
-offset_bottom = -312.0
-text = "ST"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="XPLBL" type="Label" parent="Camera2D"]
-offset_left = -633.0
-offset_top = -313.0
-offset_right = -610.0
-offset_bottom = -290.0
-text = "XP"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LVLLBL" type="Label" parent="Camera2D"]
-offset_left = -562.0
-offset_top = -289.0
-offset_right = -534.0
-offset_bottom = -266.0
-text = "LVL"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrengthStatLabel" type="Label" parent="Camera2D"]
-offset_left = 518.0
-offset_top = -357.0
-offset_right = 585.0
-offset_bottom = -334.0
-theme_override_font_sizes/font_size = 16
-text = "Strength"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpeedStatLabel" type="Label" parent="Camera2D"]
-offset_left = 518.0
-offset_top = -342.0
-offset_right = 566.0
-offset_bottom = -319.0
-theme_override_font_sizes/font_size = 16
-text = "Speed"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StaminaStatLabel" type="Label" parent="Camera2D"]
-offset_left = 518.0
-offset_top = -325.0
-offset_right = 582.0
-offset_bottom = -302.0
-theme_override_font_sizes/font_size = 16
-text = "Stamina"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MagicStatLabel" type="Label" parent="Camera2D"]
-offset_left = 518.0
-offset_top = -279.0
-offset_right = 564.0
-offset_bottom = -256.0
-theme_override_font_sizes/font_size = 16
-text = "Magic"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpecialStatLabel" type="Label" parent="Camera2D"]
-offset_left = 518.0
-offset_top = -310.0
-offset_right = 573.0
-offset_bottom = -287.0
-theme_override_font_sizes/font_size = 16
-text = "Special"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HealthStatLabel" type="Label" parent="Camera2D"]
-offset_left = 518.0
-offset_top = -294.0
-offset_right = 570.0
-offset_bottom = -271.0
-theme_override_font_sizes/font_size = 16
-text = "Health"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrengthStat" type="Label" parent="Camera2D"]
-offset_left = 590.0
-offset_top = -355.0
-offset_right = 622.0
-offset_bottom = -332.0
-theme_override_font_sizes/font_size = 16
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpeedStat" type="Label" parent="Camera2D"]
-offset_left = 591.0
-offset_top = -340.0
-offset_right = 622.0
-offset_bottom = -317.0
-theme_override_font_sizes/font_size = 16
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StaminaStat" type="Label" parent="Camera2D"]
-offset_left = 590.0
-offset_top = -324.0
-offset_right = 622.0
-offset_bottom = -301.0
-theme_override_font_sizes/font_size = 16
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MagicStat" type="Label" parent="Camera2D"]
-offset_left = 591.0
-offset_top = -278.0
-offset_right = 622.0
-offset_bottom = -255.0
-theme_override_font_sizes/font_size = 16
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpecialStat" type="Label" parent="Camera2D"]
-offset_left = 591.0
-offset_top = -309.0
-offset_right = 622.0
-offset_bottom = -286.0
-theme_override_font_sizes/font_size = 16
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HealthStat" type="Label" parent="Camera2D"]
-offset_left = 591.0
-offset_top = -293.0
-offset_right = 622.0
-offset_bottom = -270.0
-theme_override_font_sizes/font_size = 16
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LVL" type="Label" parent="Camera2D"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -524.0
-offset_top = -289.0
-offset_right = -489.0
-offset_bottom = -266.0
-grow_horizontal = 0
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
-
-[node name="TextureRect" type="TextureRect" parent="Camera2D/CanvasLayer"]
-material = SubResource("CanvasItemMaterial_jochu")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_te6s1")
-
-[node name="PointLight2D" type="PointLight2D" parent="Camera2D"]
-position = Vector2(-4, 0)
-blend_mode = 2
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 0.843137)
-texture = ExtResource("8_0l2nd")
+[node name="Camera2D" parent="." instance=ExtResource("7_c7prc")]
 
 [connection signal="area_entered" from="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="Timers/Dodge_timer" to="." method="_on_dodge_timer_timeout"]
 [connection signal="timeout" from="Timers/Dodge_cooldown" to="." method="_on_dodge_cooldown_timeout"]
 [connection signal="timeout" from="Timers/Stamina_regen_timer" to="." method="_on_stamina_regen_timer_timeout"]
 [connection signal="timeout" from="Timers/health_regen_timer" to="." method="_on_health_regen_timer_timeout"]
+[connection signal="timeout" from="Timers/Punch_cooldown" to="." method="_on_punch_cooldown_timeout"]
+[connection signal="timeout" from="Timers/Block_cooldown" to="." method="_on_block_cooldown_timeout"]

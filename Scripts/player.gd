@@ -1,6 +1,8 @@
 class_name player extends CharacterBody2D
 
+#state manager variables
 enum states {Attacking, Walking, Idling, Blocking, Dodging}
+#export variables
 @export var speed :int = 200
 @export var friction :float = 0.50
 @export var acceleration :float = 0.1
@@ -15,8 +17,11 @@ enum states {Attacking, Walking, Idling, Blocking, Dodging}
 @export var st_max: int = 100
 @export var xp: int = 0
 @export var lvl: int = 1
+#onready variables
 @onready var current_state: states = states.Idling
 @onready var can_dodge: bool = true
+@onready var can_punch: bool = true
+@onready var can_block: bool = true
 @onready var player_stats: Dictionary = {
 	"strength":1,
 	"speed":1,
@@ -31,19 +36,20 @@ enum states {Attacking, Walking, Idling, Blocking, Dodging}
 @onready var dodge_timer: Timer = $Timers/Dodge_timer
 @onready var particles : GPUParticles2D = $Marker2D/GPUParticles2D
 @onready var dodge_cooldown_timer: Timer = $Timers/Dodge_cooldown
-@onready var health_bar: ProgressBar = $Camera2D/Health
-@onready var stamina_bar: ProgressBar = $Camera2D/Stamina
-@onready var experience_bar: ProgressBar = $Camera2D/Experience
-@onready var lvl_bar: Label = $Camera2D/LVL
-@onready var strength_stat_label :Label = $Camera2D/StrengthStat
-@onready var speed_stat_label :Label = $Camera2D/SpeedStat
-@onready var stamina_stat_label :Label = $Camera2D/StaminaStat
-@onready var magic_stat_label :Label = $Camera2D/MagicStat
-@onready var special_stat_label :Label = $Camera2D/SpecialStat
-@onready var health_stat_label :Label = $Camera2D/HealthStat
-@onready var hpmax: Label = $Camera2D/HPMAX
-@onready var stmax: Label = $Camera2D/STMAX
-
+@onready var health_bar: ProgressBar = $Camera2D/CanvasLayer/Health
+@onready var stamina_bar: ProgressBar = $Camera2D/CanvasLayer/Stamina
+@onready var experience_bar: ProgressBar = $Camera2D/CanvasLayer/Experience
+@onready var lvl_bar: Label = $Camera2D/CanvasLayer/LVL
+@onready var strength_stat_label :Label = $Camera2D/CanvasLayer/StrengthStat
+@onready var speed_stat_label :Label = $Camera2D/CanvasLayer/SpeedStat
+@onready var stamina_stat_label :Label = $Camera2D/CanvasLayer/StaminaStat
+@onready var magic_stat_label :Label = $Camera2D/CanvasLayer/MagicStat
+@onready var special_stat_label :Label = $Camera2D/CanvasLayer/SpecialStat
+@onready var health_stat_label :Label = $Camera2D/CanvasLayer/HealthStat
+@onready var hpmax: Label = $Camera2D/CanvasLayer/HPMAX
+@onready var stmax: Label = $Camera2D/CanvasLayer/STMAX
+@onready var block_cooldown: Timer = $Timers/Block_cooldown
+@onready var punch_cooldown: Timer = $Timers/Punch_cooldown
 
 func _ready() -> void:
 	stamina_bar.value = st_max
@@ -81,21 +87,25 @@ func _physics_process(_delta:float) -> void:
 		current_state = states.Walking
 		
 	if Input.is_action_just_pressed("punch") and stamina > 10:
-		if ap.current_animation == "Punch":
+		if can_punch == false:
 			return
-		ap.stop()
-		ap.play("Punch",-1,punch_animation_speed,false)
-		current_state = states.Attacking
-		_take_stamina(10)
+		else:
+			ap.play("Punch",0,punch_animation_speed,false)
+			current_state = states.Attacking
+			can_punch = false
+			_take_stamina(10)
+			punch_cooldown.start()
 		
 	if Input.is_action_just_pressed("block") and stamina > 10:
-		if ap.current_animation == "Block":
+		if can_block == false:
 			return
-		ap.stop()
-		ap.play("Block",-1,block_animation_speed,false)
-		current_state = states.Blocking
-		_take_stamina(10)
-		
+		else:
+			ap.play("Block",0,block_animation_speed,false)
+			current_state = states.Blocking
+			can_block = false
+			_take_stamina(10)
+			block_cooldown.start()
+			
 	if Input.is_action_just_pressed("dodge") and stamina >20:
 		if (direction.x == 0 and direction.y == 0) or current_state == states.Dodging or can_dodge == false:
 			return
@@ -195,7 +205,6 @@ func _process(_delta: float) -> void:
 func _on_stamina_regen_timer_timeout() -> void:
 	stamina += clampi(5,0,st_max)
 
-
 func _on_health_regen_timer_timeout() -> void:
 	health += clampi(5,0,hp_max)
 	
@@ -210,3 +219,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func _on_dodge_cooldown_timeout() -> void:
 	can_dodge = true
+
+func _on_punch_cooldown_timeout() -> void:
+	can_punch = true
+
+func _on_block_cooldown_timeout() -> void:
+	can_block = true
