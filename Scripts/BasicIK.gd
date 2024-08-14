@@ -6,7 +6,6 @@ var global_hand_pos : Vector2
 @onready var shoulder = $Shoulder
 @onready var elbow = $Shoulder/Elbow
 @onready var hand = $Shoulder/Elbow/Hand
-
 @export var elbow_flipped = true
 
 var upper_arm_len = 0

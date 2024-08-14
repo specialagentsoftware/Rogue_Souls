@@ -1,0 +1,183 @@
+[gd_scene load_steps=16 format=3 uid="uid://cxyqlbx88xy64"]
+
+[ext_resource type="Script" path="res://Scripts/zombie.gd" id="1_4yi2y"]
+[ext_resource type="Texture2D" uid="uid://euwfqqj7i7m7" path="res://Scenes/Zombie/leg_spritesheet.png" id="2_fc4je"]
+[ext_resource type="Script" path="res://Scenes/ZombieMarker2D.gd" id="2_t7w3u"]
+[ext_resource type="Script" path="res://Scripts/BasicIK.gd" id="4_5nivs"]
+[ext_resource type="Texture2D" uid="uid://debxvhhr7a8mw" path="res://Scenes/Zombie/zombie_sprite_sheet.png" id="4_mpic7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_37vil"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1ibj"]
+atlas = ExtResource("2_fc4je")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rr3t"]
+atlas = ExtResource("2_fc4je")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6p5e"]
+atlas = ExtResource("2_fc4je")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iydfk"]
+atlas = ExtResource("2_fc4je")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogegq"]
+atlas = ExtResource("2_fc4je")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58pth"]
+atlas = ExtResource("2_fc4je")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r20qd"]
+atlas = ExtResource("2_fc4je")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tw6y1"]
+atlas = ExtResource("2_fc4je")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d43ws"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1ibj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rr3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6p5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iydfk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogegq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58pth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r20qd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tw6y1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Zombie" type="CharacterBody2D"]
+rotation = 1.5708
+script = ExtResource("1_4yi2y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_37vil")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(1, 1)
+script = ExtResource("2_t7w3u")
+
+[node name="Graphics" type="Node2D" parent="Marker2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Marker2D/Graphics"]
+sprite_frames = SubResource("SpriteFrames_d43ws")
+
+[node name="ArmR" type="Node2D" parent="Marker2D/Graphics"]
+position = Vector2(17.4165, 5.44653)
+script = ExtResource("4_5nivs")
+
+[node name="HandMarker" type="Marker2D" parent="Marker2D/Graphics/ArmR"]
+position = Vector2(33.5835, -15.4465)
+
+[node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmR"]
+rotation = -0.87284
+
+[node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
+position = Vector2(8.00004, 4.00003)
+rotation = 3.5129
+texture = ExtResource("4_mpic7")
+region_enabled = true
+region_rect = Rect2(91.5667, 42.371, 33.0796, 19.0844)
+
+[node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
+position = Vector2(22.1365, 1.90735e-06)
+rotation = 0.95087
+
+[node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
+position = Vector2(0.109508, -8.06151)
+rotation = 1.52117
+texture = ExtResource("4_mpic7")
+region_enabled = true
+region_rect = Rect2(94.1113, 27.1035, 29.2627, 13.5711)
+
+[node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
+position = Vector2(-1.34948, -19.3695)
+rotation = -0.0780307
+
+[node name="Hand" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand"]
+position = Vector2(0.294485, -4.85579)
+rotation = -1.51872
+texture = ExtResource("4_mpic7")
+region_enabled = true
+region_rect = Rect2(78.8438, 10.9877, 14.4193, 9.33015)
+
+[node name="ArmL" type="Node2D" parent="Marker2D/Graphics"]
+position = Vector2(-17.279, -6.43699)
+script = ExtResource("4_5nivs")
+
+[node name="HandMarker" type="Marker2D" parent="Marker2D/Graphics/ArmL"]
+position = Vector2(11.279, -18.563)
+
+[node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmL"]
+rotation = -2.09159
+
+[node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
+position = Vector2(8, -4)
+rotation = -0.382766
+texture = ExtResource("4_mpic7")
+region_enabled = true
+region_rect = Rect2(91.0584, 41.5255, 33.9278, 19.9326)
+
+[node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
+position = Vector2(20.2486, -9.53674e-07)
+rotation = 2.04485
+
+[node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
+position = Vector2(-0.331011, -12.161)
+rotation = -1.54171
+texture = ExtResource("4_mpic7")
+region_enabled = true
+region_rect = Rect2(94.1113, 25.4071, 30.1109, 16.9639)
+
+[node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
+position = Vector2(-1.07452, -21.3505)
+rotation = 0.0467431
+
+[node name="Hand" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/Hand"]
+position = Vector2(2.6685, -4.67751)
+rotation = -1.35837
+texture = ExtResource("4_mpic7")
+region_enabled = true
+region_rect = Rect2(77.9956, 10.5637, 15.6916, 10.6024)
+
+[node name="Body" type="Sprite2D" parent="Marker2D/Graphics"]
+self_modulate = Color(0.478431, 0.478431, 0.478431, 1)
+rotation = 0.112343
+texture = ExtResource("4_mpic7")
+region_enabled = true
+region_rect = Rect2(82.2422, 63.075, 45.7224, 35.5619)
+
+[node name="Head" type="Sprite2D" parent="Marker2D/Graphics"]
+self_modulate = Color(0.376471, 0.392157, 0.376471, 1)
+rotation = 0.811159
+texture = ExtResource("4_mpic7")
+region_enabled = true
+region_rect = Rect2(97.3043, 99.5622, 20.3211, 22.0145)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Marker2D/Graphics"]

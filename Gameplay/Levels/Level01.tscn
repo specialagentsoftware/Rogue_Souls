@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dakphwh8q4546"]
+[gd_scene load_steps=12 format=3 uid="uid://dakphwh8q4546"]
 
 [ext_resource type="PackedScene" uid="uid://4aag0r7aej6x" path="res://Scenes/player.tscn" id="1_0yt8f"]
 [ext_resource type="Texture2D" uid="uid://d2pb32x0588e1" path="res://environment/floor_tileset.png" id="1_o2cly"]
 [ext_resource type="Texture2D" uid="uid://bhijbdie6ym2g" path="res://environment/wall_tileset.png" id="3_8er1v"]
 [ext_resource type="Script" path="res://vfx/pseudo_3d_object.gd" id="4_7q36g"]
+[ext_resource type="PackedScene" uid="uid://cxyqlbx88xy64" path="res://Scenes/zombie.tscn" id="5_am3ko"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f1a12"]
 texture = ExtResource("1_o2cly")
@@ -92,3 +93,6 @@ layer_0/tile_data = PackedInt32Array(262146, 0, 0, 327682, 0, 0, 393218, 65536, 
 script = ExtResource("4_7q36g")
 height_color_gradient = SubResource("Gradient_ifayk")
 scale_increment_per_layer = 0.02
+
+[node name="Zombie" parent="." instance=ExtResource("5_am3ko")]
+position = Vector2(258, 356)
