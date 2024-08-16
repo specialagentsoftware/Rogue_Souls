@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://daivv562qvb1j"]
 
-[ext_resource type="Texture2D" uid="uid://810i0n2wmmai" path="res://vfx/vignette_2.png" id="1_3gjpx"]
+[ext_resource type="Texture2D" uid="uid://dtygjfdd6q538" path="res://vfx/testing.png" id="1_6grja"]
 [ext_resource type="Texture2D" uid="uid://crip5crblwv1r" path="res://vfx/light_area.png" id="2_fot6k"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jochu"]
@@ -39,7 +39,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("1_3gjpx")
+texture = ExtResource("1_6grja")
 
 [node name="Health" type="ProgressBar" parent="CanvasLayer"]
 z_index = 1
