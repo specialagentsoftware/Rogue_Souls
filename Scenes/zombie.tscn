@@ -96,7 +96,7 @@ script = ExtResource("4_5nivs")
 position = Vector2(33.5835, -15.4465)
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmR"]
-rotation = -0.87284
+rotation = -0.872838
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
 position = Vector2(8.00004, 4.00003)
@@ -107,7 +107,7 @@ region_rect = Rect2(91.5667, 42.371, 33.0796, 19.0844)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder"]
 position = Vector2(22.1365, 1.90735e-06)
-rotation = 0.95087
+rotation = 0.950867
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(0.109508, -8.06151)
@@ -118,7 +118,7 @@ region_rect = Rect2(94.1113, 27.1035, 29.2627, 13.5711)
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow"]
 position = Vector2(-1.34948, -19.3695)
-rotation = -0.0780307
+rotation = -0.078029
 
 [node name="Hand" type="Sprite2D" parent="Marker2D/Graphics/ArmR/Shoulder/Elbow/Hand"]
 position = Vector2(0.294485, -4.85579)
@@ -135,7 +135,7 @@ script = ExtResource("4_5nivs")
 position = Vector2(11.279, -18.563)
 
 [node name="Shoulder" type="Node2D" parent="Marker2D/Graphics/ArmL"]
-rotation = -2.09159
+rotation = -2.0916
 
 [node name="UpperArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
 position = Vector2(8, -4)
@@ -145,7 +145,7 @@ region_enabled = true
 region_rect = Rect2(91.0584, 41.5255, 33.9278, 19.9326)
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
-position = Vector2(20.2486, -9.53674e-07)
+position = Vector2(20.2486, 9.53674e-07)
 rotation = 2.04485
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
@@ -157,7 +157,7 @@ region_rect = Rect2(94.1113, 25.4071, 30.1109, 16.9639)
 
 [node name="Hand" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
 position = Vector2(-1.07452, -21.3505)
-rotation = 0.0467431
+rotation = 0.0467446
 
 [node name="Hand" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow/Hand"]
 position = Vector2(2.6685, -4.67751)

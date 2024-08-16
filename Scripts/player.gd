@@ -109,9 +109,10 @@ func _physics_process(_delta:float) -> void:
 	if Input.is_action_just_pressed("dodge") and stamina >20:
 		if (direction.x == 0 and direction.y == 0) or current_state == states.Dodging or can_dodge == false:
 			return
-		current_state = states.Dodging
-		_take_stamina(20)
-		dodge_speed()
+		else:
+			current_state = states.Dodging
+			_take_stamina(20)
+			dodge_speed()
 		
 	if Input.is_action_just_pressed("hurt"):
 		_take_health(10)

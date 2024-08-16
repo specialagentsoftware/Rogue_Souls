@@ -946,7 +946,7 @@ region_rect = Rect2(92, 45, 31, 16)
 offset_amnt = 12
 
 [node name="Elbow" type="Node2D" parent="Marker2D/Graphics/ArmL/Shoulder"]
-position = Vector2(23, 9.31323e-10)
+position = Vector2(23, 4.65661e-10)
 rotation = 0.000589792
 
 [node name="LowerArm" type="Sprite2D" parent="Marker2D/Graphics/ArmL/Shoulder/Elbow"]
