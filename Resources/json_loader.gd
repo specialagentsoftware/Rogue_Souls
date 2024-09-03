@@ -7,34 +7,34 @@ class_name JSONLoader extends Node
 
 const save_path: String = "user://user_save.json"
 const default_save_file: String = "res://Resources/default_save_file.json"
-var data = {}
+var data :Dictionary = {}
 
-func write_save(data_to_save):
-	var file = FileAccess.open(save_path, FileAccess.WRITE)
+func write_save(data_to_save:Dictionary)->void:
+	var file :FileAccess = FileAccess.open(save_path, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data_to_save))
 	file.close()
 	file = null
 	
-func read_save():
-	var file = FileAccess.open(save_path, FileAccess.READ)
-	var save_data = JSON.parse_string(file.get_as_text())
+func read_save() -> Dictionary:
+	var file :FileAccess = FileAccess.open(save_path, FileAccess.READ)
+	var save_data: Dictionary = JSON.parse_string(file.get_as_text())
 	data = save_data
 	return data
 	
-func load_or_create():
+func load_or_create() ->Dictionary:
 	if FileAccess.file_exists(save_path):
 		return read_save()
 	else:
-		var file = FileAccess.open(default_save_file, FileAccess.READ)
-		var default_data = JSON.parse_string(file.get_as_text())
+		var file :FileAccess = FileAccess.open(default_save_file, FileAccess.READ)
+		var default_data:Dictionary = JSON.parse_string(file.get_as_text())
 		data = default_data
 		write_save(default_data)
 		return data
 		
-func clear_save():
+func clear_save() -> void:
 	if FileAccess.file_exists(save_path):
-		var file = FileAccess.open(default_save_file, FileAccess.READ)
-		var default_data = JSON.parse_string(file.get_as_text())
+		var file :FileAccess = FileAccess.open(default_save_file, FileAccess.READ)
+		var default_data :Dictionary = JSON.parse_string(file.get_as_text())
 		data = default_data
 		write_save(default_data)
 		

@@ -12,3 +12,7 @@ const main_scenes = {
 const levels = {
 	"game_start" : "res://Gameplay/Levels/Level01.tscn"
 }
+
+const menus = {
+	"upgrade_menu" : "res://Scenes/upgrade_menu.tscn"
+}

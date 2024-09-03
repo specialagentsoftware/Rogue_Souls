@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://w636n2nkognp"]
+
+[ext_resource type="Script" path="res://vfx/drop_shadow.gd" id="1_3awe3"]
+
+[node name="DropShadow" type="Node2D"]
+script = ExtResource("1_3awe3")

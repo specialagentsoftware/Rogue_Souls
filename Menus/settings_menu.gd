@@ -18,12 +18,12 @@ signal language_changed(language: String)
 @onready var close_button:Button = %CloseButton as Button
 @onready var save_button:Button = %SaveButton as Button
 @onready var quit_button:Button = %QuitButton as Button
-@onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
-@onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
+@onready var SFX_BUS_ID:int = AudioServer.get_bus_index("SFX")
+@onready var MUSIC_BUS_ID:int = AudioServer.get_bus_index("Music")
 
 var user_prefs:UserPrefs
 
-func _ready():
+func _ready() -> void:
 	# load (or create) file with these saved preferences
 	user_prefs = UserPrefs.load_or_create()
 	
@@ -43,45 +43,45 @@ func _ready():
 	if language_dropdown:
 		language_dropdown.selected = user_prefs.language
 
-func _process(_delta):
+func _process(_delta:float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		close_settings()
 
-func close_settings():
+func close_settings() -> void:
 	queue_free()
 
-func _on_close_button_pressed():
+func _on_close_button_pressed() -> void:
 	close_settings()
 	
-func _on_save_button_pressed():
+func _on_save_button_pressed() -> void:
 	print("save button pressed")
 	# note - this is where I would/will put the ability for players to manually save data
 	# Ex: something like the below
 	# Globals.user_save.save_all_game_data()
 
-func _on_quit_button_pressed():
+func _on_quit_button_pressed() -> void:
 	# https://docs.godotengine.org/en/stable/tutorials/inputs/handling_quit_requests.html
 	# todo - are you sure prompt
 	# todo - save before quitting if in-game
 	get_tree().quit()
 
-func _on_music_slider_value_changed(_value):
+func _on_music_slider_value_changed(_value:float) -> void:
 	AudioServer.set_bus_volume_db(MUSIC_BUS_ID, linear_to_db(_value))
 	AudioServer.set_bus_mute(MUSIC_BUS_ID, _value < .05)
 	user_prefs.music_volume = _value
 
-func _on_sfx_slider_value_changed(_value):
+func _on_sfx_slider_value_changed(_value:float) -> void:
 	AudioServer.set_bus_volume_db(SFX_BUS_ID, linear_to_db(_value))
 	AudioServer.set_bus_mute(SFX_BUS_ID, _value < .05)
 	user_prefs.sfx_volume = _value
 
-func _on_language_dropdown_item_selected(_index):
+func _on_language_dropdown_item_selected(_index:int)-> void:
 	# todo - set selected language
 	user_prefs.language = _index
 	# todo - needs to be wired to a more central place for handling loc (planned for future version)
 	language_changed.emit(_index)
 
-func _notification(what):
+func _notification(what:int)-> void:
 	match what:
 		NOTIFICATION_ENTER_TREE:
 			get_tree().paused = true
